@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace General
+namespace CockroachRunner
 {
     [CreateAssetMenu(menuName = "#SCRIPTNAME#", fileName = "#SCRIPTNAME#")]
     public class #SCRIPTNAME# : ScriptableObject

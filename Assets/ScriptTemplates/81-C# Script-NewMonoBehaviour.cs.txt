@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace General
+namespace CockroachRunner
 {
     public class #SCRIPTNAME# : MonoBehaviour
     {
