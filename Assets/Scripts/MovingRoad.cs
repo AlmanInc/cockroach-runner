@@ -6,6 +6,7 @@ namespace CockroachRunner
 {
     public class MovingRoad : MonoBehaviour
     {
+        [SerializeField] private Transform watchOutObject;
         [SerializeField] private Transform anchor;
         [SerializeField] private float speed;
         [SerializeField] private float offset;
@@ -13,6 +14,8 @@ namespace CockroachRunner
 
         private IEnumerator Start()
         {
+            //Vector3 offset = target.position - watchOutObject.position;
+
             while (true)
             {                
                 /*
