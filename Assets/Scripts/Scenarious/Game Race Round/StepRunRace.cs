@@ -5,10 +5,18 @@ namespace CockroachRunner
 {
     public class StepRunRace : ScenarioStep
     {
+        [Header("Action Steps")]
+        [SerializeField] private ScenarioStep prepareRaceStep;
+
+        [Header("Base Settings")]
+        [SerializeField] private PlayerMovable player;
+
         public override void Play()
         {
             base.Play();
-            FinishStep();
+
+            prepareRaceStep.Play();
+            player.Play();
         }
     }
 }

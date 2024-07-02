@@ -17,7 +17,6 @@ namespace CockroachRunner
         private void Start () 
         {
             startZPosition = player.position.z;
-            Play();
         }
 
         public void Play()
