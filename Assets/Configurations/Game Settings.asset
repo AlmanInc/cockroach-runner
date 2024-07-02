@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backCountTimeToStartRace: 3
   raceTime: 60
-  playerBaseSpeed: 3
+  playerBaseSpeed: 6
   playerJumpBackDistance: 45

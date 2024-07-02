@@ -8,21 +8,20 @@ namespace CockroachRunner
 {
     public class StepRunRace : ScenarioStep
     {
-        [Header("Action Steps")]
-        [SerializeField] private ScenarioStep prepareRaceStep;
-
         [Header("Base Settings")]
         [SerializeField] private PlayerMovable player;
         [SerializeField] private Text labelRaceTime;
 
         [Inject] private GameState gameState;
+        [Inject] private GameScreenView gameScreenView;
 
         public override void Play()
         {
             base.Play();
 
             SetRaceTimeLabel();
-            prepareRaceStep.Play();
+
+            gameScreenView.OpenActualPanel(InGameViews.Game);
             player.Play();
 
             StartCoroutine(RaceTimeProcess());

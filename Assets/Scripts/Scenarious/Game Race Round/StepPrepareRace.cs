@@ -1,27 +1,25 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
-using Scenario;
 using Zenject;
+using Scenario;
 
 namespace CockroachRunner
 {
     public class StepPrepareRace : ScenarioStep
-    {
-        [Header("Action Steps")]
-        [SerializeField] private ScenarioStep prepareSceneStep;
-
+    {        
         [Header("Base Settings")]
         [SerializeField] private Text labelBackCount;
 
         [Inject] private GameSettings gameSettings;
         [Inject] private GameState gameState;
+        [Inject] private GameScreenView gameScreenView;
 
         public override void Play()
         {
             base.Play();
 
-            prepareSceneStep.Play();
+            gameScreenView.OpenActualPanel(InGameViews.ReadySetGo);
             gameState.RaceTime = gameSettings.RaceTime;
             StartCoroutine(BackCountProcess());
         }
