@@ -8,6 +8,7 @@ public class GameInstaller : MonoInstaller
         
     public override void InstallBindings()
     {
+        Container.Bind<GameState>().AsSingle();
         Container.Bind<EventsManager>().AsSingle();
 
         Container.BindInstance(gameSettings).AsSingle();

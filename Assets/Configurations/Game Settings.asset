@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 937174b2a0ac35f4299821f3567233c0, type: 3}
   m_Name: Game Settings
   m_EditorClassIdentifier: 
-  playerBaseSpeed: 15
+  backCountTimeToStartRace: 3
+  raceTime: 60
+  playerBaseSpeed: 3
   playerJumpBackDistance: 45

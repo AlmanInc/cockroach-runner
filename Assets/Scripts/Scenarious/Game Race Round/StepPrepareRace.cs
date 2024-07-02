@@ -15,12 +15,14 @@ namespace CockroachRunner
         [SerializeField] private Text labelBackCount;
 
         [Inject] private GameSettings gameSettings;
+        [Inject] private GameState gameState;
 
         public override void Play()
         {
             base.Play();
 
             prepareSceneStep.Play();
+            gameState.RaceTime = gameSettings.RaceTime;
             StartCoroutine(BackCountProcess());
         }
 
