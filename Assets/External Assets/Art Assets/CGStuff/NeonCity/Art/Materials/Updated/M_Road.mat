@@ -140,11 +140,11 @@ Material:
     - _Enable_Roughness_Texture: 1
     - _ExcludeFromTUAndAA: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 0
     - _GlossyReflections: 1
     - _Mask_Contrast: 0
     - _Mask_Intensity: 1
-    - _Metallic: 1
+    - _Metallic: 0
     - _Metallic_Intensity: 1
     - _Mode: 0
     - _Normal_Intensity: 2

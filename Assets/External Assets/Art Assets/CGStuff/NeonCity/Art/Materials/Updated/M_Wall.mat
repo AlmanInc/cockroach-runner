@@ -141,11 +141,11 @@ Material:
     - _Enable_Roughness_Texture: 1
     - _ExcludeFromTUAndAA: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 0
     - _GlossyReflections: 1
     - _Mask_Contrast: 0
     - _Mask_Intensity: 1
-    - _Metallic: 0.75
+    - _Metallic: 0.5
     - _Metallic_Intensity: 0
     - _Mode: 0
     - _Normal_Intensity: 0.1
@@ -194,9 +194,9 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Base_Color: {r: 0.37254903, g: 0.37254903, b: 0.37254903, a: 1}
-    - _Color: {r: 0.37254903, g: 0.37254903, b: 0.37254903, a: 1}
+    - _Color: {r: 0.15566039, g: 0.5866389, b: 1, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
-    - _EmissionColor: {r: 0, g: 1, b: 0.023376942, a: 1}
+    - _EmissionColor: {r: 0, g: 0.939064, b: 1, a: 1}
     - _Emissive_Color: {r: 0.8000001, g: 0, b: 0.9960785, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &5530080412501812657
