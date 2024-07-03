@@ -6,17 +6,19 @@ namespace CockroachRunner
     {
         [SerializeField] private Transform target;
         [SerializeField] private Transform watchOutObject;
-        
-        private Vector3 offset;
+                
+        private float offset;
 
         private void Start () 
         {
-            offset = target.position - watchOutObject.position;
+            offset = target.position.z - watchOutObject.position.z;
         }
 
         private void LateUpdate () 
         {
-            target.position = watchOutObject.position + offset;
+            Vector3 position = target.position;
+            position.z = watchOutObject.position.z + offset;
+            target.position = position;
         }
     }
 }
