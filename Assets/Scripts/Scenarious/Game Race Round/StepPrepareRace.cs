@@ -10,6 +10,7 @@ namespace CockroachRunner
     {        
         [Header("Base Settings")]
         [SerializeField] private Text labelBackCount;
+        [SerializeField] private GameObject bitcoinPanel;
 
         [Inject] private GameSettings gameSettings;
         [Inject] private GameState gameState;
@@ -20,6 +21,7 @@ namespace CockroachRunner
             base.Play();
 
             gameScreenView.OpenActualPanel(InGameViews.ReadySetGo);
+            bitcoinPanel.SetActive(true);
             gameState.RaceTime = gameSettings.RaceTime;
             StartCoroutine(BackCountProcess());
         }
