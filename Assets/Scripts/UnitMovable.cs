@@ -4,20 +4,19 @@ using Zenject;
 
 namespace CockroachRunner
 {
-    public class PlayerMovable : MonoBehaviour
+    public class UnitMovable : MonoBehaviour
     {
-        [SerializeField] private Transform player;
+        [SerializeField] private Transform cachedTransform;
+        [SerializeField] private Transform center;
         
         [Inject] private GameSettings gameSettings;
         
         private Coroutine runCoroutine;
-        private float startZPosition;
         private bool isPlaying;
 
-        private void Start () 
-        {
-            startZPosition = player.position.z;
-        }
+        public Transform CachedTransform => cachedTransform;
+
+        private Transform cockroach;
 
         public void Play()
         {
@@ -45,12 +44,19 @@ namespace CockroachRunner
 
             isPlaying = false;
         }
+
+        public void AddCockroach(Transform targetCockroach)
+        {
+            cockroach = targetCockroach;
+            cockroach.SetParent(center);
+            cockroach.localPosition = Vector3.zero;
+        }
                 
         private IEnumerator RunProcess()
         {
             while (true)
             {
-                player.position += Vector3.forward * gameSettings.PlayerBaseSpeed * Time.deltaTime;
+                cachedTransform.position += Vector3.forward * gameSettings.PlayerBaseSpeed * Time.deltaTime;
                 yield return null;
             }
         }

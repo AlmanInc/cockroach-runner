@@ -5,10 +5,14 @@ namespace CockroachRunner
     [CreateAssetMenu(menuName = "Game Settings", fileName = "Game Settings")]
     public class GameSettings : ScriptableObject
     {
+        [Space]
         [SerializeField] private float backCountTimeToStartRace = 3f;
         [SerializeField] private int raceTime = 60;
         [SerializeField] private float playerBaseSpeed = 5f;
         [SerializeField] private float playerJumpBackDistance = 10f;
+
+        [Space]
+        [SerializeField] private GameObject[] cockroachPrefabs;
 
         public float BackCountTimeToStartRace => backCountTimeToStartRace;
 
@@ -17,5 +21,7 @@ namespace CockroachRunner
         public float PlayerBaseSpeed => playerBaseSpeed;
 
         public float PlayerJumpBackDistance => playerJumpBackDistance;
+
+        public GameObject[] CockroachPrefabs => cockroachPrefabs;
     }
 }

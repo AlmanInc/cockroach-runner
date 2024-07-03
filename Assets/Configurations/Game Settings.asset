@@ -16,3 +16,8 @@ MonoBehaviour:
   raceTime: 60
   playerBaseSpeed: 9
   playerJumpBackDistance: 45
+  cockroachPrefabs:
+  - {fileID: 8375237516562954451, guid: 313ed9a7366973840b1bea39c2e11f93, type: 3}
+  - {fileID: 2889799820089173369, guid: 54252d46902714f4a88f536046998659, type: 3}
+  - {fileID: 4866075754305724616, guid: 7017d2d9b1c5b4b44855f978ad2e8e07, type: 3}
+  - {fileID: 6535654908398530402, guid: 3ae1fa4d1f0ff4c4b839b9730009686f, type: 3}

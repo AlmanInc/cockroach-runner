@@ -9,7 +9,7 @@ namespace CockroachRunner
     public class StepRunRace : ScenarioStep
     {
         [Header("Base Settings")]
-        [SerializeField] private PlayerMovable player;
+        [SerializeField] private UnitMovable player;
         [SerializeField] private Text labelRaceTime;
 
         [Inject] private GameState gameState;
