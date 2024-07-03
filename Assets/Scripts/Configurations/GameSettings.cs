@@ -12,7 +12,7 @@ namespace CockroachRunner
         [SerializeField] private float playerJumpBackDistance = 10f;
 
         [Space]
-        [SerializeField] private GameObject[] cockroachPrefabs;
+        [SerializeField] private Cockroach[] cockroachPrefabs;
 
         public float BackCountTimeToStartRace => backCountTimeToStartRace;
 
@@ -22,6 +22,6 @@ namespace CockroachRunner
 
         public float PlayerJumpBackDistance => playerJumpBackDistance;
 
-        public GameObject[] CockroachPrefabs => cockroachPrefabs;
+        public Cockroach[] CockroachPrefabs => cockroachPrefabs;
     }
 }

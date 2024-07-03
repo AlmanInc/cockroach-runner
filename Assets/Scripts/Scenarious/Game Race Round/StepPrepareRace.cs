@@ -40,10 +40,10 @@ namespace CockroachRunner
             int playerTreadmillIndex = Random.Range(0, treadmills.Length - 1);
             player.CachedTransform.position = treadmills[playerTreadmillIndex].position;
 
-            var prefabs = gameSettings.CockroachPrefabs;
-            var prefab = prefabs[Random.Range(0, prefabs.Length - 1)];
+            Cockroach[] prefabs = gameSettings.CockroachPrefabs;
+            Cockroach prefab = prefabs[Random.Range(0, prefabs.Length - 1)];
 
-            player.AddCockroach(Instantiate(prefab).GetComponent<Transform>());
+            player.AddCockroach(Instantiate<Cockroach>(prefab));
         }
 
         private IEnumerator BackCountProcess()

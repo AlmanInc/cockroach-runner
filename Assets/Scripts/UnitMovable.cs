@@ -16,7 +16,7 @@ namespace CockroachRunner
 
         public Transform CachedTransform => cachedTransform;
 
-        private Transform cockroach;
+        private Cockroach cockroach;
 
         public void Play()
         {
@@ -42,21 +42,26 @@ namespace CockroachRunner
                 runCoroutine = null;
             }
 
+            cockroach.SetSpeed(0f);
             isPlaying = false;
         }
 
-        public void AddCockroach(Transform targetCockroach)
+        public void AddCockroach(Cockroach targetCockroach)
         {
             cockroach = targetCockroach;
-            cockroach.SetParent(center);
-            cockroach.localPosition = Vector3.zero;
+            cockroach.CachedTransform.SetParent(center);
+            cockroach.CachedTransform.localPosition = Vector3.zero;
+
+            cockroach.SetSpeed(0f);
         }
                 
         private IEnumerator RunProcess()
         {
             while (true)
             {
-                cachedTransform.position += Vector3.forward * gameSettings.PlayerBaseSpeed * Time.deltaTime;
+                float speed = gameSettings.PlayerBaseSpeed;
+                cockroach.SetSpeed(speed);
+                cachedTransform.position += Vector3.forward * speed * Time.deltaTime;
                 yield return null;
             }
         }
