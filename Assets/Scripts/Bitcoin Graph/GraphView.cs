@@ -10,6 +10,7 @@ namespace CockroachRunner
     {
         [Space]
         [SerializeField] private RectTransform candlesCointainer;
+        [SerializeField] private TrandController trand;
         [SerializeField] private float startMinPrice;
         [SerializeField] private float startMaxPrice;
         [SerializeField] private float timeFrame = 3f;        
@@ -31,12 +32,16 @@ namespace CockroachRunner
 
         private List<CandleView> candles;
         private List<CandleView> freeCandles;
+
+        private RandomPriceTrand priceTrand;
                 
         private void Start()
         {            
             candles = new List<CandleView>();
             freeCandles = new List<CandleView>();
             activeCandlesCount = 0;
+
+            priceTrand = new RandomPriceTrand(minPrice, maxPrice);
 
             minPrice = startMinPrice;
             maxPrice = startMaxPrice;
@@ -66,32 +71,39 @@ namespace CockroachRunner
         {
             yield return new WaitForEndOfFrame();
 
+            float price = currentPrice;
+
             float time = timeFrame;
 
             CandleView actualCandle = GenerateNewCandle();
             actualCandle.transform.position = cells[0].transform.position;
-            actualCandle.DrawCandle(currentPrice);
+            actualCandle.DrawCandle(price);
             //activeCandlesCount++;
+
+            float changeTrandTime = Random.Range(5f, 10f);
 
             while (true)
             {
-                if (currentPrice < minPrice)
+                //price = (float)priceTrand.Next();
+                price += trand.Next();
+
+                if (price < minPrice)
                 {
-                    minPrice = currentPrice;
+                    minPrice = price;
                     SetNewMinMaxPrices(minPrice, maxPrice);
                     RedrawCandles();
                     actualCandle.RedrawForNewLimits();
                 }
 
-                if (currentPrice > maxPrice)
+                if (price > maxPrice)
                 {
-                    maxPrice = currentPrice;
+                    maxPrice = price;
                     SetNewMinMaxPrices(minPrice, maxPrice);
                     RedrawCandles();
                     actualCandle.RedrawForNewLimits();
                 }
 
-                actualCandle.DrawCandle(currentPrice);
+                actualCandle.DrawCandle(price);
 
                 time -= Time.deltaTime;
                 if (time <= 0f)
@@ -127,9 +139,16 @@ namespace CockroachRunner
 
                     actualCandle = GenerateNewCandle();
                     actualCandle.transform.position = cells[0].transform.position;
-                    actualCandle.DrawCandle(currentPrice);
+                    actualCandle.DrawCandle(price);
 
                     time = timeFrame;
+                }
+
+                changeTrandTime -= Time.deltaTime;
+                if (changeTrandTime <= 0f)
+                {
+                    changeTrandTime = Random.Range(5f, 10f);
+                    priceTrand.ChangeTrand();
                 }
 
                 yield return null;
