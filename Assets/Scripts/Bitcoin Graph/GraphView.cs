@@ -48,9 +48,19 @@ namespace CockroachRunner
         
         public void Update() 
         {
-            //Vector3 position = start.position;
-            //position.y = GetPriceYPosition(startPrice);
-            //start.position = position;
+            if (currentPrice < minPrice)
+            {
+                minPrice = currentPrice;
+                SetNewMinMaxPrices(minPrice, maxPrice);
+                candle.RedrawForNewLimits();
+            }
+
+            if (currentPrice > maxPrice) 
+            {
+                maxPrice = currentPrice;
+                SetNewMinMaxPrices(minPrice, maxPrice);
+                candle.RedrawForNewLimits();
+            }
 
             candle.DrawCandle(currentPrice);
         }

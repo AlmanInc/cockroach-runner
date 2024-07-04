@@ -35,7 +35,7 @@ namespace CockroachRunner
             bottomShadow.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 0f);
         }
 
-        public void DrawCandle(float price)
+        private void Activate(float price)
         {
             if (!isActive)
             {
@@ -50,45 +50,57 @@ namespace CockroachRunner
                 MinPrice = price;
                 MaxPrice = price;
             }
-            else
+        }
+
+        public void RedrawForNewLimits()
+        {
+            Vector3 position = transform.position;
+            position.y = graphView.GetPriceYPosition(StartPrice);
+            transform.position = position;
+
+            DrawCandle(EndPrice);
+        }
+
+        public void DrawCandle(float price)
+        {
+            Activate(price);
+
+            EndPrice = price;
+
+            topBar.gameObject.SetActive(EndPrice >= StartPrice);
+            bottomBar.gameObject.SetActive(EndPrice < StartPrice);
+            RectTransform bar = EndPrice >= StartPrice ? topBar : bottomBar;
+
+            float y = graphView.GetPriceYPosition(EndPrice);
+            float height = Mathf.Abs(transform.position.y - y);
+            if (height < 2f)
             {
-                EndPrice = price;
+                height = 2f;
+            }
 
-                topBar.gameObject.SetActive(EndPrice >= StartPrice);
-                bottomBar.gameObject.SetActive(EndPrice < StartPrice);
-                RectTransform bar = EndPrice >= StartPrice ? topBar : bottomBar;
+            bar.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
 
-                float y = graphView.GetPriceYPosition(EndPrice);
-                float height = Mathf.Abs(transform.position.y - y);
-                if (height < 2f)
-                {
-                    height = 2f;
-                }
+            if (EndPrice < MinPrice)
+            {
+                MinPrice = EndPrice;
+            }
 
-                bar.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
+            if (EndPrice > MaxPrice)
+            {
+                MaxPrice = EndPrice;
+            }
 
-                if (EndPrice < MinPrice)
-                {
-                    MinPrice = EndPrice;
-                }
+            topShadow.color = EndPrice >= StartPrice ? upColor : downColor;
+            bottomShadow.color = EndPrice >= StartPrice ? upColor : downColor;
 
-                if (EndPrice > MaxPrice)
-                {
-                    MaxPrice = EndPrice;
-                }
+            if (EndPrice > MinPrice && MinPrice < StartPrice)
+            {
+                DrawShadow(bottomShadow.rectTransform, MinPrice);
+            }
 
-                topShadow.color = EndPrice >= StartPrice ? upColor : downColor;
-                bottomShadow.color = EndPrice >= StartPrice ? upColor : downColor;
-
-                if (EndPrice > MinPrice && MinPrice < StartPrice)
-                {
-                    DrawShadow(bottomShadow.rectTransform, MinPrice);
-                }
-
-                if (EndPrice < MaxPrice && MaxPrice > StartPrice)
-                {
-                    DrawShadow(topShadow.rectTransform, MaxPrice);
-                }
+            if (EndPrice < MaxPrice && MaxPrice > StartPrice)
+            {
+                DrawShadow(topShadow.rectTransform, MaxPrice);
             }
         }
 
