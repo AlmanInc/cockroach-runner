@@ -1,3 +1,4 @@
+using UnityEngine.UI;
 using UnityEngine;
 
 namespace CockroachRunner
@@ -8,17 +9,24 @@ namespace CockroachRunner
         [SerializeField] private float startMaxPrice;
         [SerializeField] private PriceLine[] lines;
 
-        [SerializeField] private RectTransform start;
+        [Space]
+        [SerializeField] private VerticalLayoutGroup verticalLayoutGroup;
+        [SerializeField] private CandleView candle;
         [SerializeField] private float startPrice;
+        [SerializeField] private float currentPrice;
 
         private float minPrice;
         private float maxPrice;
 
+        private void OnEnable() => LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)transform);
+
         private void Start()
-        {
+        {            
             minPrice = startMinPrice;
             maxPrice = startMaxPrice;
             SetNewMinMaxPrices(minPrice, maxPrice);
+
+            candle.DrawCandle(startPrice);
         }
 
         public void SetNewMinMaxPrices(float min, float max)
@@ -32,18 +40,19 @@ namespace CockroachRunner
             }
         }
 
-        private float GetPriceYPosition(float price)
+        public float GetPriceYPosition(float price)
         {                                    
             float deltaPriceProgress = Mathf.Clamp01((price - minPrice) / (maxPrice - minPrice));
-            print(deltaPriceProgress);
             return Mathf.Lerp(lines[lines.Length - 1].transform.position.y, lines[0].transform.position.y, deltaPriceProgress);
         }
-
+        
         public void Update() 
         {
-            Vector3 position = start.position;
-            position.y = GetPriceYPosition(startPrice);
-            start.position = position;
+            //Vector3 position = start.position;
+            //position.y = GetPriceYPosition(startPrice);
+            //start.position = position;
+
+            candle.DrawCandle(currentPrice);
         }
     }
 }
