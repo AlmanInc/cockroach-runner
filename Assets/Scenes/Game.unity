@@ -8926,9 +8926,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   topBar: {fileID: 60616270}
-  topShadow: {fileID: 1297144675}
+  topShadow: {fileID: 1297144676}
   bottomBar: {fileID: 943706306}
-  bottomShadow: {fileID: 117864270}
+  bottomShadow: {fileID: 117864271}
   upColor: {r: 0.5882353, g: 1, b: 0.54901963, a: 1}
   downColor: {r: 1, g: 0.42745098, b: 0.42745098, a: 1}
 --- !u!1 &1295502159
