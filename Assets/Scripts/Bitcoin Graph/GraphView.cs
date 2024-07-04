@@ -71,6 +71,7 @@ namespace CockroachRunner
             CandleView actualCandle = GenerateNewCandle();
             actualCandle.transform.position = cells[0].transform.position;
             actualCandle.DrawCandle(currentPrice);
+            //activeCandlesCount++;
 
             while (true)
             {
@@ -91,6 +92,45 @@ namespace CockroachRunner
                 }
 
                 actualCandle.DrawCandle(currentPrice);
+
+                time -= Time.deltaTime;
+                if (time <= 0f)
+                {
+                    // Сдвиг графика
+                    candles.Insert(0, actualCandle);
+                    int breakIndex = -1;
+                    for (int i = 0; i < candles.Count; i++)
+                    {
+                        if (i < cells.Length - 1)
+                        {
+                            Vector3 position = candles[i].transform.position;
+                            position.x = cells[i + 1].transform.position.x;
+                            candles[i].transform.position = position;
+                        }
+                        else
+                        {
+                            breakIndex = i;
+                            break;
+                        }
+                    }
+
+                    if (breakIndex > 0)
+                    {
+                        while (breakIndex < candles.Count) 
+                        {
+                            var candle = candles[breakIndex];
+                            candles.RemoveAt(breakIndex);
+                            candle.Clear();
+                            freeCandles.Add(candle);
+                        }                        
+                    }
+
+                    actualCandle = GenerateNewCandle();
+                    actualCandle.transform.position = cells[0].transform.position;
+                    actualCandle.DrawCandle(currentPrice);
+
+                    time = timeFrame;
+                }
 
                 yield return null;
             }
