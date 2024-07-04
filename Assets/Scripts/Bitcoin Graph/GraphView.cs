@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -15,13 +16,24 @@ namespace CockroachRunner
         [SerializeField] private float startPrice;
         [SerializeField] private float currentPrice;
 
+        [Header("Cells For Bar X Positions")]
+        [SerializeField] private Transform[] cells;
+
+        [Space]
+        [SerializeField] private RectTransform[] rebuildLayoutTargets;
+
         private float minPrice;
         private float maxPrice;
 
-        private void OnEnable() => LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)transform);
-
+        private List<CandleView> candles;
+                
         private void Start()
-        {            
+        {
+            foreach (var item in rebuildLayoutTargets)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(item);
+            }
+
             minPrice = startMinPrice;
             maxPrice = startMaxPrice;
             SetNewMinMaxPrices(minPrice, maxPrice);
