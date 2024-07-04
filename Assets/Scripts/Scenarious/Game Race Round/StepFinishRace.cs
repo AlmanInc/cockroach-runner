@@ -8,6 +8,7 @@ namespace CockroachRunner
     {
         [Header("Base Settings")]
         [SerializeField] private GameObject bitcoinPanel;
+        [SerializeField] private GraphView graphView;
 
         [Inject] private GameScreenView gameScreenView;
 
@@ -16,6 +17,8 @@ namespace CockroachRunner
             base.Play();
 
             bitcoinPanel.SetActive(false);
+            graphView.Clear();
+
             gameScreenView.OpenActualPanel(InGameViews.Reward);
 
             FinishStep();

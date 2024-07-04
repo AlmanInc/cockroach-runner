@@ -1,44 +1,48 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
+using Zenject;
 
 namespace CockroachRunner
 {
     public class GraphView : MonoBehaviour
     {
+        [Space]
+        [SerializeField] private RectTransform candlesCointainer;
         [SerializeField] private float startMinPrice;
         [SerializeField] private float startMaxPrice;
-        [SerializeField] private PriceLine[] lines;
-
-        [Space]
-        [SerializeField] private VerticalLayoutGroup verticalLayoutGroup;
-        [SerializeField] private CandleView candle;
+        [SerializeField] private float timeFrame = 3f;        
         [SerializeField] private float startPrice;
         [SerializeField] private float currentPrice;
 
+        [Header("Price Lines")]
+        [SerializeField] private PriceLine[] lines;
+        
         [Header("Cells For Bar X Positions")]
         [SerializeField] private Transform[] cells;
 
-        [Space]
-        [SerializeField] private RectTransform[] rebuildLayoutTargets;
+        [Inject] DiContainer container;
+        [Inject] private GameSettings gameSettings;
 
         private float minPrice;
         private float maxPrice;
+        private int activeCandlesCount;
 
         private List<CandleView> candles;
+        private List<CandleView> freeCandles;
                 
         private void Start()
-        {
-            foreach (var item in rebuildLayoutTargets)
-            {
-                LayoutRebuilder.ForceRebuildLayoutImmediate(item);
-            }
+        {            
+            candles = new List<CandleView>();
+            freeCandles = new List<CandleView>();
+            activeCandlesCount = 0;
 
             minPrice = startMinPrice;
             maxPrice = startMaxPrice;
-            SetNewMinMaxPrices(minPrice, maxPrice);
-
-            candle.DrawCandle(startPrice);
+            SetNewMinMaxPrices(minPrice, maxPrice);    
+            
+            StartCoroutine(DrawCandlesProcess());
         }
 
         public void SetNewMinMaxPrices(float min, float max)
@@ -58,23 +62,78 @@ namespace CockroachRunner
             return Mathf.Lerp(lines[lines.Length - 1].transform.position.y, lines[0].transform.position.y, deltaPriceProgress);
         }
         
-        public void Update() 
+        private IEnumerator DrawCandlesProcess()
         {
-            if (currentPrice < minPrice)
+            yield return new WaitForEndOfFrame();
+
+            float time = timeFrame;
+
+            CandleView actualCandle = GenerateNewCandle();
+            actualCandle.transform.position = cells[0].transform.position;
+            actualCandle.DrawCandle(currentPrice);
+
+            while (true)
             {
-                minPrice = currentPrice;
-                SetNewMinMaxPrices(minPrice, maxPrice);
+                if (currentPrice < minPrice)
+                {
+                    minPrice = currentPrice;
+                    SetNewMinMaxPrices(minPrice, maxPrice);
+                    RedrawCandles();
+                    actualCandle.RedrawForNewLimits();
+                }
+
+                if (currentPrice > maxPrice)
+                {
+                    maxPrice = currentPrice;
+                    SetNewMinMaxPrices(minPrice, maxPrice);
+                    RedrawCandles();
+                    actualCandle.RedrawForNewLimits();
+                }
+
+                actualCandle.DrawCandle(currentPrice);
+
+                yield return null;
+            }
+        }
+
+        private CandleView GenerateNewCandle()
+        {
+            if (freeCandles.Count == 0)
+            {
+                return container.InstantiatePrefab(gameSettings.CandleViewPrefab, candlesCointainer).GetComponent<CandleView>();
+            }
+            else
+            {
+                CandleView candle = freeCandles[0];
+                freeCandles.RemoveAt(0);
+                return candle;
+            }
+        }
+
+        private void RedrawCandles()
+        {
+            foreach (CandleView candle in candles) 
+            {
                 candle.RedrawForNewLimits();
             }
+        }
 
-            if (currentPrice > maxPrice) 
+        public void Clear()
+        {
+            StopAllCoroutines();
+
+            foreach (var item in candles)
             {
-                maxPrice = currentPrice;
-                SetNewMinMaxPrices(minPrice, maxPrice);
-                candle.RedrawForNewLimits();
+                Destroy(item.gameObject);
             }
 
-            candle.DrawCandle(currentPrice);
+            foreach (var item in freeCandles)
+            {
+                Destroy(item.gameObject);
+            }
+
+            candles.Clear();
+            freeCandles.Clear();
         }
     }
 }

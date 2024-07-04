@@ -499,6 +499,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35884824}
   m_CullTransparentMesh: 1
+--- !u!1 &58961911
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 58961912}
+  m_Layer: 5
+  m_Name: Candle View Container
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &58961912
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58961911}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 671819350}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &60616269
 GameObject:
   m_ObjectHideFlags: 0
@@ -5227,6 +5262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 671819350}
   - component: {fileID: 671819351}
+  - component: {fileID: 671819352}
   m_Layer: 5
   m_Name: Panel Bitcoin Graph
   m_TagString: Untagged
@@ -5249,6 +5285,7 @@ RectTransform:
   - {fileID: 1968440767}
   - {fileID: 854902873}
   - {fileID: 1295502160}
+  - {fileID: 58961912}
   - {fileID: 1261028987}
   m_Father: {fileID: 496900808}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5269,8 +5306,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7465288e640a967409a152b72a66f4ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  candlesCointainer: {fileID: 58961912}
   startMinPrice: 59.85
   startMaxPrice: 67.125
+  timeFrame: 3
+  startPrice: 62.275
+  currentPrice: 62.275
   lines:
   - {fileID: 1664097755071184594}
   - {fileID: 70710119}
@@ -5279,23 +5320,31 @@ MonoBehaviour:
   - {fileID: 1929928105}
   - {fileID: 1625421023}
   - {fileID: 607743570}
-  verticalLayoutGroup: {fileID: 1295502161}
-  candle: {fileID: 1261028988}
-  startPrice: 62.275
-  currentPrice: 62.275
   cells:
-  - {fileID: 549897183}
-  - {fileID: 712025867}
-  - {fileID: 1749069525}
-  - {fileID: 1800282113}
-  - {fileID: 2053268732}
-  - {fileID: 2043115169}
-  - {fileID: 1673270836}
-  - {fileID: 1791979090}
-  - {fileID: 1694301017}
-  - {fileID: 1212831098}
-  - {fileID: 277036837}
   - {fileID: 1259910323}
+  - {fileID: 277036837}
+  - {fileID: 1212831098}
+  - {fileID: 1694301017}
+  - {fileID: 1791979090}
+  - {fileID: 1673270836}
+  - {fileID: 2043115169}
+  - {fileID: 2053268732}
+  - {fileID: 1800282113}
+  - {fileID: 1749069525}
+  - {fileID: 712025867}
+  - {fileID: 549897183}
+--- !u!114 &671819352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671819349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c45b3ffea55f154188cf8ea871085ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   rebuildLayoutTargets:
   - {fileID: 496900808}
   - {fileID: 671819350}
@@ -9386,7 +9435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1261028987
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14455,6 +14504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bitcoinPanel: {fileID: 671819349}
+  graphView: {fileID: 671819351}
 --- !u!4 &2003434248
 Transform:
   m_ObjectHideFlags: 0
