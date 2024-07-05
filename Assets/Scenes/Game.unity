@@ -6017,6 +6017,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1915580871}
   watchOutObject: {fileID: 137879346}
+  useZMovable: 1
+  specialOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &854902872
 GameObject:
   m_ObjectHideFlags: 0
@@ -6959,6 +6961,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 963194228}
   watchOutObject: {fileID: 137879346}
+  useZMovable: 0
+  specialOffset: {x: -1.6, y: -0.35, z: 2}
 --- !u!1001 &968223996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7709,6 +7713,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1831803070}
   watchOutObject: {fileID: 137879346}
+  useZMovable: 1
+  specialOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1088519992
 GameObject:
   m_ObjectHideFlags: 0
@@ -10968,6 +10974,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1259673203}
   watchOutObject: {fileID: 137879346}
+  useZMovable: 1
+  specialOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1540939121
 GameObject:
   m_ObjectHideFlags: 0
@@ -11415,6 +11423,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1964268025}
   watchOutObject: {fileID: 137879346}
+  useZMovable: 1
+  specialOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &1577202213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14901,6 +14911,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 2081758642}
   watchOutObject: {fileID: 137879346}
+  useZMovable: 1
+  specialOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &2097307945
 GameObject:
   m_ObjectHideFlags: 0

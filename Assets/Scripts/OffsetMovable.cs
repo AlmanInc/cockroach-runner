@@ -6,19 +6,37 @@ namespace CockroachRunner
     {
         [SerializeField] private Transform target;
         [SerializeField] private Transform watchOutObject;
-                
+        [SerializeField] private bool useZMovable = true;
+        [SerializeField] private Vector3 specialOffset;
+
+        private Vector3 offset3D;
         private float offset;
 
-        private void Start () 
+        private void Start()
         {
-            offset = target.position.z - watchOutObject.position.z;
+            if (useZMovable)
+            {
+                offset = target.position.z - watchOutObject.position.z;
+            }
+            else
+            {
+                offset3D = target.position - watchOutObject.position;
+                target.position = watchOutObject.position + offset3D + specialOffset;
+            }
         }
 
-        private void LateUpdate () 
+        private void LateUpdate()
         {
-            Vector3 position = target.position;
-            position.z = watchOutObject.position.z + offset;
-            target.position = position;
+            if (useZMovable)
+            {
+                Vector3 position = target.position;
+                position.z = watchOutObject.position.z + offset;
+                target.position = position;
+            }
+            else
+            {
+                target.position = watchOutObject.position + offset3D + specialOffset;
+            }
         }
     }
 }
