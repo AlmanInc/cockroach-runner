@@ -8,7 +8,8 @@ namespace CockroachRunner
     {
         [SerializeField] private Transform cachedTransform;
         [SerializeField] private Transform center;
-        
+        [SerializeField] private GameObject nameObject;
+                
         [Inject] private GameSettings gameSettings;
         
         private Coroutine runCoroutine;
@@ -17,6 +18,8 @@ namespace CockroachRunner
         public Transform CachedTransform => cachedTransform;
 
         private Cockroach cockroach;
+
+        public void ShowName() => nameObject.SetActive(true);
 
         public void Play()
         {
@@ -29,7 +32,7 @@ namespace CockroachRunner
             {
                 StopCoroutine(runCoroutine);
             }
-
+                        
             runCoroutine = StartCoroutine(RunProcess());
             isPlaying = true;
         }

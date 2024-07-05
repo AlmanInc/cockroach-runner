@@ -9,7 +9,7 @@ namespace CockroachRunner
     public class StepRunRace : ScenarioStep
     {
         [Header("Base Settings")]
-        [SerializeField] private UnitMovable player;
+        [SerializeField] private UnitMovable[] units;
         [SerializeField] private Text labelRaceTime;
 
         [Inject] private GameState gameState;
@@ -22,7 +22,11 @@ namespace CockroachRunner
             SetRaceTimeLabel();
 
             gameScreenView.OpenActualPanel(InGameViews.Game);
-            player.Play();
+
+            foreach (var unit in units) 
+            {
+                unit.Play();
+            }
 
             StartCoroutine(RaceTimeProcess());
         }
@@ -37,8 +41,11 @@ namespace CockroachRunner
                 SetRaceTimeLabel();
             }
 
-            player.Stop();
-
+            foreach (var unit in units) 
+            {
+                unit.Stop();
+            }
+            
             FinishStep();
         }
 

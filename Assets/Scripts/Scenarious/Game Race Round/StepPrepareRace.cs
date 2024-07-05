@@ -15,6 +15,9 @@ namespace CockroachRunner
 
         [Space]
         [SerializeField] private UnitMovable player;
+
+        [Space]
+        [SerializeField] private UnitMovable[] bots;
         [SerializeField] private Transform[] treadmills;
 
         [Inject] private GameSettings gameSettings;
@@ -37,13 +40,33 @@ namespace CockroachRunner
 
         private void GenerateTreadmealsAndCockroaches()
         {
-            int playerTreadmillIndex = Random.Range(0, treadmills.Length - 1);
-            player.CachedTransform.position = treadmills[playerTreadmillIndex].position;
+            List<int> treadmillIndexList = new List<int>();
+            for (int i = 0; i < treadmills.Length; i++) 
+            {
+                treadmillIndexList.Add(i);
+            }
+
+            int listIndex = Random.Range(0, treadmillIndexList.Count - 1);
+            int unitIndex = treadmillIndexList[listIndex];
+            player.CachedTransform.position = treadmills[unitIndex].position;
+            treadmillIndexList.RemoveAt(listIndex);
 
             Cockroach[] prefabs = gameSettings.CockroachPrefabs;
-            Cockroach prefab = prefabs[Random.Range(0, prefabs.Length - 1)];
+            Cockroach prefab = prefabs[Random.Range(0, prefabs.Length)];
 
             player.AddCockroach(Instantiate<Cockroach>(prefab));
+            player.ShowName();
+
+            for (int i = 0; i < bots.Length && treadmillIndexList.Count > 0; i++)
+            {
+                listIndex = Random.Range(0, treadmillIndexList.Count - 1);
+                unitIndex = treadmillIndexList[listIndex];
+                bots[i].CachedTransform.position = treadmills[unitIndex].position;
+                treadmillIndexList.RemoveAt(listIndex);
+                                
+                prefab = prefabs[Random.Range(0, prefabs.Length)];
+                bots[i].AddCockroach(Instantiate<Cockroach>(prefab));
+            }
         }
 
         private IEnumerator BackCountProcess()

@@ -84,6 +84,8 @@ namespace CockroachRunner
 
             while (true)
             {
+
+                yield return new WaitForEndOfFrame();
                 //price = (float)priceTrand.Next();
                 price += trand.Next();
 
