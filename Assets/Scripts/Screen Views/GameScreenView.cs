@@ -16,12 +16,14 @@ namespace CockroachRunner
         }
 
         [SerializeField] private ScenarioManager runRaceScenario;
+        
         [SerializeField] private Button buttonMenu;
         [SerializeField] private PanelItem[] items;
 
         private void OnEnable() => buttonMenu?.onClick.AddListener(OpenMenu);
 
         private void OnDisable() => buttonMenu?.onClick.RemoveListener(OpenMenu);
+        
                 
         private void Start() => runRaceScenario.Play();
 

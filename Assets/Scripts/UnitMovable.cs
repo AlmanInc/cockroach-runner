@@ -62,7 +62,7 @@ namespace CockroachRunner
         {
             while (true)
             {
-                float speed = gameSettings.PlayerBaseSpeed;
+                float speed = gameSettings.BaseRunningSpeed;
                 cockroach.SetSpeed(speed);
                 cachedTransform.position += Vector3.forward * speed * Time.deltaTime;
                 yield return null;

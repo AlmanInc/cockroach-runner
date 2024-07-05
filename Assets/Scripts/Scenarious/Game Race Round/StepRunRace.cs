@@ -11,9 +11,24 @@ namespace CockroachRunner
         [Header("Base Settings")]
         [SerializeField] private UnitMovable[] units;
         [SerializeField] private Text labelRaceTime;
+        [SerializeField] private GameObject blockPanel;
+        [SerializeField] private Button buttonUp;
+        [SerializeField] private Button buttonDown;
 
         [Inject] private GameState gameState;
         [Inject] private GameScreenView gameScreenView;
+
+        private void OnEnable()
+        {
+            buttonUp?.onClick.AddListener(UpClick);
+            buttonDown?.onClick.AddListener(DownClick);
+        }
+
+        private void OnDisable()
+        {
+            buttonUp?.onClick.RemoveListener(UpClick);
+            buttonDown?.onClick.RemoveListener(DownClick);
+        }
 
         public override void Play()
         {
@@ -63,5 +78,15 @@ namespace CockroachRunner
                                  $"{GameUtility.NumberToStringWithLeadZero(minutes)}:" +
                                  $"{GameUtility.NumberToStringWithLeadZero(seconds)}";
         }
+
+        private void UpClick()
+        {
+            blockPanel.SetActive(true);
+        }
+
+        private void DownClick()
+        {
+            blockPanel.SetActive(true);
+        } 
     }
 }
