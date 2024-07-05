@@ -57,9 +57,14 @@ namespace CockroachRunner
                 SetRaceTimeLabel();
             }
 
+            gameState.PlayerPlace = 1;
             foreach (var unit in units) 
             {
                 unit.Stop();
+                if (player != unit && player.transform.position.z < unit.transform.position.z)
+                {
+                    gameState.PlayerPlace++;
+                }
             }
             
             FinishStep();
