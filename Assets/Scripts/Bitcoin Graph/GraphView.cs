@@ -15,7 +15,6 @@ namespace CockroachRunner
         [SerializeField] private float startMaxPrice;
         [SerializeField] private float timeFrame = 3f;        
         [SerializeField] private float startPrice;
-        [SerializeField] private float currentPrice;
 
         [Header("Price Lines")]
         [SerializeField] private PriceLine[] lines;
@@ -28,18 +27,20 @@ namespace CockroachRunner
 
         private float minPrice;
         private float maxPrice;
-        private int activeCandlesCount;
-
+        private float price;
+        
         private List<CandleView> candles;
         private List<CandleView> freeCandles;
 
         private RandomPriceTrand priceTrand;
+
+        public float CurrentPrice => price;
                 
         private void Start()
         {            
             candles = new List<CandleView>();
             freeCandles = new List<CandleView>();
-            activeCandlesCount = 0;
+            price = startPrice;
 
             priceTrand = new RandomPriceTrand(minPrice, maxPrice);
 
@@ -71,15 +72,14 @@ namespace CockroachRunner
         {
             yield return new WaitForEndOfFrame();
 
-            float price = currentPrice;
+            price = startPrice;
 
             float time = timeFrame;
 
             CandleView actualCandle = GenerateNewCandle();
             actualCandle.transform.position = cells[0].transform.position;
             actualCandle.DrawCandle(price);
-            //activeCandlesCount++;
-
+            
             float changeTrandTime = Random.Range(5f, 10f);
 
             while (true)

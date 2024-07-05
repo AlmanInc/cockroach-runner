@@ -10,6 +10,7 @@ namespace CockroachRunner
     {
         [Header("Base Settings")]
         [SerializeField] private UnitMovable[] units;
+        [SerializeField] private UnitMovable player;
         [SerializeField] private Text labelRaceTime;
         [SerializeField] private GameObject blockPanel;
         [SerializeField] private Button buttonUp;
@@ -82,11 +83,13 @@ namespace CockroachRunner
         private void UpClick()
         {
             blockPanel.SetActive(true);
+            player.MakePrediction(true);
         }
 
         private void DownClick()
         {
             blockPanel.SetActive(true);
+            player.MakePrediction(false);
         } 
     }
 }
