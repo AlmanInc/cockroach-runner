@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4154608, g: 0.20491973, b: 0.19850776, a: 1}
+  m_IndirectSpecularColor: {r: 0.14172384, g: 0.034110732, b: 0.032174952, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1930,7 +1930,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1030996026, guid: abc00000000003998461290242913969, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 1030996026, guid: abc00000000003998461290242913969, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6506,7 +6506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1030996026, guid: abc00000000003998461290242913969, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30
+      value: -29
       objectReference: {fileID: 0}
     - target: {fileID: 1030996026, guid: abc00000000003998461290242913969, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6584,7 +6584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1030996026, guid: abc00000000003998461290242913969, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 1030996026, guid: abc00000000003998461290242913969, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7789,7 +7789,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1030996026, guid: abc00000000003998461290242913969, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30
+      value: -29
       objectReference: {fileID: 0}
     - target: {fileID: 1030996026, guid: abc00000000003998461290242913969, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10190,7 +10190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1030996026, guid: abc00000000003998461290242913969, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30
+      value: -29
       objectReference: {fileID: 0}
     - target: {fileID: 1030996026, guid: abc00000000003998461290242913969, type: 3}
       propertyPath: m_LocalPosition.y
