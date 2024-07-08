@@ -44,6 +44,12 @@ namespace CockroachRunner
                         
             runCoroutine = StartCoroutine(RunProcess());
             speedCoroutine = StartCoroutine(SpeedProcess());
+
+            if (!isPlayer)
+            {
+                StartCoroutine(MakePredictionProcess());
+            }
+
             isPlaying = true;
         }
 
@@ -63,7 +69,7 @@ namespace CockroachRunner
 
             predictionTime = 0f;
             cockroach.SetSpeed(0f);
-            SetSpeed(0f);
+            SetSpeed(0f, false);
             isPlaying = false;
         }
 
@@ -78,8 +84,6 @@ namespace CockroachRunner
                 
         private IEnumerator RunProcess()
         {
-            //speed = gameSettings.BaseRunningSpeed;
-
             while (true)
             {                
                 cockroach.SetSpeed(speed);
@@ -96,21 +100,11 @@ namespace CockroachRunner
         }
 
         private IEnumerator SpeedProcess()
-        {
+        {            
             while (true)
-            {
-                yield return null;
-
-                if (!isPlayer && predictionTime <= 0f)
-                {
-                    yield return new WaitForSeconds(Random.Range(0.2f, 0.8f));
-                    MakePrediction(Random.Range(1, 101) <= 50);
-                }
-
+            {                
                 if (predictionTime > 0f)
                 {
-                    yield return null;
-                                        
                     predictionTime -= Time.deltaTime;
                                         
                     if ((price <= graphView.CurrentPrice && predictUp) || (price >= graphView.CurrentPrice && !predictUp))
@@ -126,13 +120,29 @@ namespace CockroachRunner
                 {
                     SetSpeed(gameSettings.BaseRunningSpeed);
                 }
+
+                yield return null;
             }
         }
 
-        private void SetSpeed(float value)
+        private IEnumerator MakePredictionProcess()
         {
-            speed = value;
+            while (true)
+            {
+                if (predictionTime <= 0f)
+                {
+                    yield return new WaitForSeconds(Random.Range(0.2f, 0.8f));
+                    MakePrediction(Random.Range(1, 101) <= 50);
+                }
 
+                yield return null;
+            }
+        }
+
+        private void SetSpeed(float value, bool fadeSpeed = true)
+        {
+            speed = fadeSpeed ? Mathf.MoveTowards(speed, value, gameSettings.ChangeSpeedRate * Time.deltaTime) : value;
+            
             if (isPlayer)
             {
                 eventsManager.InvokeEvent(GameEvents.PlayerSetSpeed, speed);

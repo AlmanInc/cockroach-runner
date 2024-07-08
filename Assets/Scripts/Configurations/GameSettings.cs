@@ -5,16 +5,16 @@ namespace CockroachRunner
     [CreateAssetMenu(menuName = "Game Settings", fileName = "Game Settings")]
     public class GameSettings : ScriptableObject
     {
-        [Space]
+        [Header("Base Settings")]
         [SerializeField] private float backCountTimeToStartRace = 3f;
         [SerializeField] private int raceTime = 60;
         [SerializeField] private float baseRunningSpeed = 5f;
         [SerializeField] private float baseRunningSpeedLabelValue = 2.5f;
         [SerializeField] private float fastRunningSpeed = 10f;
         [SerializeField] private float fastRunningSpeedLabelValue = 5f;
-        
+        [SerializeField] private float changeSpeedRate = 10f;
 
-        [Space]
+        [Header("Prefabs")]
         [SerializeField] private CandleView candleViewPrefab;
 
         [Space]
@@ -31,6 +31,8 @@ namespace CockroachRunner
         public float FastRunningSpeed => fastRunningSpeed;
 
         public float FastRunningSpeedLabelValue => fastRunningSpeedLabelValue;
+
+        public float ChangeSpeedRate => changeSpeedRate;
                 
         public CandleView CandleViewPrefab => candleViewPrefab;
 
