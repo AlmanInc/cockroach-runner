@@ -10,7 +10,8 @@ namespace CockroachRunner
         [SerializeField] private Transform center;
         [SerializeField] private GameObject nameObject;
         [SerializeField] private bool isPlayer;
-                
+
+        [Inject] private EventsManager eventsManager;
         [Inject] private GameSettings gameSettings;
         [Inject] private GraphView graphView;
         
@@ -62,6 +63,7 @@ namespace CockroachRunner
 
             predictionTime = 0f;
             cockroach.SetSpeed(0f);
+            SetSpeed(0f);
             isPlaying = false;
         }
 
@@ -76,11 +78,10 @@ namespace CockroachRunner
                 
         private IEnumerator RunProcess()
         {
-            speed = gameSettings.BaseRunningSpeed;
+            //speed = gameSettings.BaseRunningSpeed;
 
             while (true)
-            {
-                //speed = gameSettings.BaseRunningSpeed;
+            {                
                 cockroach.SetSpeed(speed);
                 cachedTransform.position += Vector3.forward * speed * Time.deltaTime;
                 yield return null;
@@ -114,17 +115,27 @@ namespace CockroachRunner
                                         
                     if ((price <= graphView.CurrentPrice && predictUp) || (price >= graphView.CurrentPrice && !predictUp))
                     {
-                        speed = gameSettings.FastRunningSpeed;
+                        SetSpeed(gameSettings.FastRunningSpeed);
                     }
                     else
                     {
-                        speed = gameSettings.BaseRunningSpeed;
+                        SetSpeed(gameSettings.BaseRunningSpeed);
                     }
                 }
                 else
                 {
-                    speed = gameSettings.BaseRunningSpeed;
+                    SetSpeed(gameSettings.BaseRunningSpeed);
                 }
+            }
+        }
+
+        private void SetSpeed(float value)
+        {
+            speed = value;
+
+            if (isPlayer)
+            {
+                eventsManager.InvokeEvent(GameEvents.PlayerSetSpeed, speed);
             }
         }
     }

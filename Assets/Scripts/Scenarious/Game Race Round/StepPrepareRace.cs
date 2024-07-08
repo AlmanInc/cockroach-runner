@@ -18,6 +18,7 @@ namespace CockroachRunner
 
         [Space]
         [SerializeField] private UnitMovable player;
+        [SerializeField] private SpeedView speedView;
 
         [Space]
         [SerializeField] private UnitMovable[] bots;
@@ -76,6 +77,8 @@ namespace CockroachRunner
 
             treadmillsGrabber.Clear();
             cockroachGrabber.Clear();
+
+            speedView.Activate();
         }
 
         private IEnumerator BackCountProcess()

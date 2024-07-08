@@ -9,7 +9,10 @@ namespace CockroachRunner
         [SerializeField] private float backCountTimeToStartRace = 3f;
         [SerializeField] private int raceTime = 60;
         [SerializeField] private float baseRunningSpeed = 5f;
+        [SerializeField] private float baseRunningSpeedLabelValue = 2.5f;
         [SerializeField] private float fastRunningSpeed = 10f;
+        [SerializeField] private float fastRunningSpeedLabelValue = 5f;
+        
 
         [Space]
         [SerializeField] private CandleView candleViewPrefab;
@@ -23,7 +26,11 @@ namespace CockroachRunner
 
         public float BaseRunningSpeed => baseRunningSpeed;
 
+        public float BaseRunningSpeedLabelValue => baseRunningSpeedLabelValue;
+
         public float FastRunningSpeed => fastRunningSpeed;
+
+        public float FastRunningSpeedLabelValue => fastRunningSpeedLabelValue;
                 
         public CandleView CandleViewPrefab => candleViewPrefab;
 

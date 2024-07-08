@@ -4,6 +4,6 @@ namespace CockroachRunner
 {
     public enum GameEvents
     {
-        PlayerJumpBack
+        PlayerSetSpeed
     }
 }
