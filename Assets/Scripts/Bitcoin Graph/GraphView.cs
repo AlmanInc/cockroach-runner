@@ -13,12 +13,13 @@ namespace CockroachRunner
         [SerializeField] private TrandController trand;
         [SerializeField] private float startMinPrice;
         [SerializeField] private float startMaxPrice;
-        [SerializeField] private float timeFrame = 3f;        
+        [SerializeField] private float timeFrame = 3f;
         [SerializeField] private float startPrice;
+        [SerializeField] private PriceLine currentPriceLine;
 
         [Header("Price Lines")]
         [SerializeField] private PriceLine[] lines;
-        
+
         [Header("Cells For Bar X Positions")]
         [SerializeField] private Transform[] cells;
 
@@ -28,26 +29,22 @@ namespace CockroachRunner
         private float minPrice;
         private float maxPrice;
         private float price;
-        
+
         private List<CandleView> candles;
         private List<CandleView> freeCandles;
 
-        private RandomPriceTrand priceTrand;
-
         public float CurrentPrice => price;
-                
+
         private void Start()
-        {            
+        {
             candles = new List<CandleView>();
             freeCandles = new List<CandleView>();
             price = startPrice;
 
-            priceTrand = new RandomPriceTrand(minPrice, maxPrice);
-
             minPrice = startMinPrice;
             maxPrice = startMaxPrice;
-            SetNewMinMaxPrices(minPrice, maxPrice);    
-            
+            SetNewMinMaxPrices(minPrice, maxPrice);
+
             StartCoroutine(DrawCandlesProcess());
         }
 
@@ -63,11 +60,11 @@ namespace CockroachRunner
         }
 
         public float GetPriceYPosition(float price)
-        {                                    
+        {
             float deltaPriceProgress = Mathf.Clamp01((price - minPrice) / (maxPrice - minPrice));
             return Mathf.Lerp(lines[lines.Length - 1].transform.position.y, lines[0].transform.position.y, deltaPriceProgress);
         }
-        
+
         private IEnumerator DrawCandlesProcess()
         {
             yield return new WaitForEndOfFrame();
@@ -79,15 +76,17 @@ namespace CockroachRunner
             CandleView actualCandle = GenerateNewCandle();
             actualCandle.transform.position = cells[0].transform.position;
             actualCandle.DrawCandle(price);
-            
-            float changeTrandTime = Random.Range(5f, 10f);
+
+            DrawPriceLine(currentPriceLine);
+            currentPriceLine.gameObject.SetActive(true);
 
             while (true)
             {
 
                 yield return new WaitForEndOfFrame();
-                //price = (float)priceTrand.Next();
                 price += trand.Next();
+
+                DrawPriceLine(currentPriceLine);
 
                 if (price < minPrice)
                 {
@@ -130,13 +129,13 @@ namespace CockroachRunner
 
                     if (breakIndex > 0)
                     {
-                        while (breakIndex < candles.Count) 
+                        while (breakIndex < candles.Count)
                         {
                             var candle = candles[breakIndex];
                             candles.RemoveAt(breakIndex);
                             candle.Clear();
                             freeCandles.Add(candle);
-                        }                        
+                        }
                     }
 
                     actualCandle = GenerateNewCandle();
@@ -144,13 +143,6 @@ namespace CockroachRunner
                     actualCandle.DrawCandle(price);
 
                     time = timeFrame;
-                }
-
-                changeTrandTime -= Time.deltaTime;
-                if (changeTrandTime <= 0f)
-                {
-                    changeTrandTime = Random.Range(5f, 10f);
-                    priceTrand.ChangeTrand();
                 }
 
                 yield return null;
@@ -173,10 +165,19 @@ namespace CockroachRunner
 
         private void RedrawCandles()
         {
-            foreach (CandleView candle in candles) 
+            foreach (CandleView candle in candles)
             {
                 candle.RedrawForNewLimits();
             }
+        }
+
+        private void DrawPriceLine(PriceLine line)
+        {
+            Vector3 position = line.transform.position;
+            position.y = GetPriceYPosition(price);
+            line.transform.position = position;
+
+            line.LabelPrice.text = string.Format("{0:0.000}", price);
         }
 
         public void Clear()
