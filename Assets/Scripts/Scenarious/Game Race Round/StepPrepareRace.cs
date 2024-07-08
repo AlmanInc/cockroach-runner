@@ -8,7 +8,10 @@ using Scenario;
 namespace CockroachRunner
 {
     public class StepPrepareRace : ScenarioStep
-    {        
+    {
+        [Header("Action Steps")]
+        [SerializeField] private ScenarioStep pulseStep;
+
         [Header("Base Settings")]
         [SerializeField] private Text labelBackCount;
         [SerializeField] private GameObject bitcoinPanel;
@@ -81,14 +84,15 @@ namespace CockroachRunner
             
             while (time > 0f) 
             {
-                labelBackCount.text = $"{Mathf.RoundToInt(time)}...";
+                labelBackCount.text = $"{Mathf.RoundToInt(time)}";
+                pulseStep?.Play();
                 
                 yield return new WaitForSeconds(1f);
 
                 time -= 1f;
             }
 
-            labelBackCount.text = $"{Mathf.RoundToInt(time)}...";
+            labelBackCount.text = $"{Mathf.RoundToInt(time)}";
             FinishStep();
         }
     }
