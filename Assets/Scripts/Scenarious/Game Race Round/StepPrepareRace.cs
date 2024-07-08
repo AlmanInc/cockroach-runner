@@ -40,33 +40,39 @@ namespace CockroachRunner
 
         private void GenerateTreadmealsAndCockroaches()
         {
-            List<int> treadmillIndexList = new List<int>();
-            for (int i = 0; i < treadmills.Length; i++) 
-            {
-                treadmillIndexList.Add(i);
-            }
-
-            int listIndex = Random.Range(0, treadmillIndexList.Count - 1);
-            int unitIndex = treadmillIndexList[listIndex];
-            player.CachedTransform.position = treadmills[unitIndex].position;
-            treadmillIndexList.RemoveAt(listIndex);
-
             Cockroach[] prefabs = gameSettings.CockroachPrefabs;
-            Cockroach prefab = prefabs[Random.Range(0, prefabs.Length)];
+
+            ArrayUniqueIndexGrabber treadmillsGrabber = new ArrayUniqueIndexGrabber();
+            treadmillsGrabber.Activate(treadmills.Length);
+
+            ArrayUniqueIndexGrabber cockroachGrabber = new ArrayUniqueIndexGrabber();
+            cockroachGrabber.Activate(prefabs.Length);
+            
+            int unitIndex = treadmillsGrabber.NexIndex();
+            player.CachedTransform.position = treadmills[unitIndex].position;
+            
+            Cockroach prefab = prefabs[cockroachGrabber.NexIndex()];
 
             player.AddCockroach(Instantiate<Cockroach>(prefab));
             player.ShowName();
-
-            for (int i = 0; i < bots.Length && treadmillIndexList.Count > 0; i++)
+                        
+            for (int i = 0; i < bots.Length; i++)
             {
-                listIndex = Random.Range(0, treadmillIndexList.Count - 1);
-                unitIndex = treadmillIndexList[listIndex];
+                unitIndex = treadmillsGrabber.NexIndex();
+
+                if (unitIndex < 0)
+                {
+                    break;
+                }
+
                 bots[i].CachedTransform.position = treadmills[unitIndex].position;
-                treadmillIndexList.RemoveAt(listIndex);
-                                
-                prefab = prefabs[Random.Range(0, prefabs.Length)];
+
+                prefab = prefabs[cockroachGrabber.NexIndex()];
                 bots[i].AddCockroach(Instantiate<Cockroach>(prefab));
             }
+
+            treadmillsGrabber.Clear();
+            cockroachGrabber.Clear();
         }
 
         private IEnumerator BackCountProcess()
