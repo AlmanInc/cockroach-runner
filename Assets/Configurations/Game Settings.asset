@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backCountTimeToStartRace: 3
   raceTime: 60
-  baseRunningSpeed: 7
-  baseRunningSpeedLabelValue: 2.5
-  fastRunningSpeed: 14
+  baseRunningSpeed: 10
+  baseRunningSpeedLabelValue: 1.6
+  fastRunningSpeed: 30
   fastRunningSpeedLabelValue: 5
-  changeSpeedRate: 15
+  changeSpeedRate: 20
   candleViewPrefab: {fileID: 7253834081102627202, guid: 37680c0afa5db3a4f9f422990b4e8a98, type: 3}
   cockroachPrefabs:
   - {fileID: -6899917529352781007, guid: 313ed9a7366973840b1bea39c2e11f93, type: 3}

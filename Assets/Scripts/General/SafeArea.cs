@@ -24,6 +24,12 @@ namespace CockroachRunner
 
             rectTransform.anchorMin = anchorMin;
             rectTransform.anchorMax = anchorMax;
+
+
+            Screen.orientation = ScreenOrientation.Portrait;
+            Screen.autorotateToLandscapeLeft = false;
+            Screen.autorotateToLandscapeRight = false;
+            Screen.autorotateToPortraitUpsideDown = false;
         }
     }
 }
