@@ -32,6 +32,7 @@ SpriteAtlas:
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
+    - {fileID: 2800000, guid: 5fa3637dead71a045be6c60bb56048a7, type: 3}
     - {fileID: 2800000, guid: f2f7eb5529d783140800cc8ccfe41dbc, type: 3}
     - {fileID: 2800000, guid: 5305124c523e90b41b538b590280bd20, type: 3}
     - {fileID: 2800000, guid: 5001e6a0c76b63f4e95158bdc4f78ddc, type: 3}
@@ -75,6 +76,7 @@ SpriteAtlas:
     - 574b029cf6a3c6a4d87573dabbc09605: 21300000
     - 951565dc21ae8174cb3542ed8e6720da: 21300000
     - 65110b4d0a75cc848a0b1e6855cf5a09: 21300000
+    - 5fa3637dead71a045be6c60bb56048a7: 21300000
     - 265fff6f79ee6994c888ebeedce3c79e: 21300000
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -97,6 +99,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 574b029cf6a3c6a4d87573dabbc09605, type: 3}
   - {fileID: 21300000, guid: 951565dc21ae8174cb3542ed8e6720da, type: 3}
   - {fileID: 21300000, guid: 65110b4d0a75cc848a0b1e6855cf5a09, type: 3}
+  - {fileID: 21300000, guid: 5fa3637dead71a045be6c60bb56048a7, type: 3}
   - {fileID: 21300000, guid: 265fff6f79ee6994c888ebeedce3c79e, type: 3}
   m_PackedSpriteNamesToIndex:
   - panel-background-item-3
@@ -119,6 +122,7 @@ SpriteAtlas:
   - "\u0418\u043A\u043E\u043D\u043A\u0438"
   - button-dark-reg-border-big
   - sprite-circle-fill
+  - panel-background-item-0
   - panel-buttons-1
   m_RenderDataMap: {}
   m_Tag: Atlas - Main

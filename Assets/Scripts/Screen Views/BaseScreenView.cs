@@ -10,8 +10,20 @@ namespace CockroachRunner
 
         private void OnDisable() => Deactivate();
 
-        public virtual void Activate() => screenViewPanel?.SetActive(true);
-        
-        public virtual void Deactivate() => screenViewPanel?.SetActive(false);
+        public virtual void Activate()
+        {
+            if (screenViewPanel != null)
+            {
+                screenViewPanel?.SetActive(true);
+            }
+        }
+
+        public virtual void Deactivate()
+        {
+            if (screenViewPanel != null)
+            {
+                screenViewPanel?.SetActive(false);
+            }
+        }
     }
 }
