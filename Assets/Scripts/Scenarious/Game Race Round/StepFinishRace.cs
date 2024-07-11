@@ -11,6 +11,7 @@ namespace CockroachRunner
         [SerializeField] private GameObject bitcoinPanel;
         [SerializeField] private GraphView graphView;
         [SerializeField] private Text labelPlace;
+        [SerializeField] private Text labelResultTime;
 
         [Inject] private GameState gameState;
         [Inject] private GameScreenView gameScreenView;
@@ -23,6 +24,7 @@ namespace CockroachRunner
             graphView.Clear();
 
             labelPlace.text = gameState.PlayerPlace.ToString();
+            labelResultTime.text = GameUtility.SecondsToFullTimeStringFormat(gameState.RaceTime);
             gameScreenView.OpenActualPanel(InGameViews.Reward);
 
             FinishStep();

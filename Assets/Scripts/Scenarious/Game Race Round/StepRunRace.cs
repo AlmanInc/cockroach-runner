@@ -70,30 +70,14 @@ namespace CockroachRunner
         }
 
         private IEnumerator RaceTimeProcess()
-        {
-            //while (gameState.RaceTime > 0f)
+        {            
             while (true)
             {
                 yield return new WaitForSeconds(1f);
-                //gameState.RaceTime -= 1;
                 gameState.RaceTime++;
 
                 SetRaceTimeLabel();
             }
-
-            /*
-            gameState.PlayerPlace = 1;
-            foreach (var unit in units) 
-            {
-                unit.Stop();
-                if (player != unit && player.transform.position.z < unit.transform.position.z)
-                {
-                    gameState.PlayerPlace++;
-                }
-            }
-            
-            FinishStep();
-            */
         }
 
         private void UnitFinishRace(object[] args)
@@ -119,21 +103,8 @@ namespace CockroachRunner
             }
         }
 
-        private void SetRaceTimeLabel()
-        {
-            int leftTime = gameState.RaceTime;
-
-            int hours = (leftTime / 60) / 60;
-            leftTime -= hours * 60 * 60;
-            int minutes = leftTime / 60;
-            leftTime -= minutes * 60;
-            int seconds = leftTime;
-
-            labelRaceTime.text = $"{GameUtility.NumberToStringWithLeadZero(hours)}:" +
-                                 $"{GameUtility.NumberToStringWithLeadZero(minutes)}:" +
-                                 $"{GameUtility.NumberToStringWithLeadZero(seconds)}";
-        }
-
+        private void SetRaceTimeLabel() => labelRaceTime.text = GameUtility.SecondsToFullTimeStringFormat(gameState.RaceTime);            
+        
         private void UpClick()
         {
             blockPanel.SetActive(true);

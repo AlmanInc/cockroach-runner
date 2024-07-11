@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
+using Zenject;
 
 namespace CockroachRunner
 {
@@ -10,6 +11,8 @@ namespace CockroachRunner
         [SerializeField] private float checkDelay;
         [SerializeField] private UnitMovable player;
         [SerializeField] private UnitMovable[] bots;
+
+        [Inject] private GameState gameState;
 
         private Coroutine checkPlaceCoroutine;
 
@@ -38,11 +41,11 @@ namespace CockroachRunner
 
             while (true) 
             {
-                int position = 1;
+                int position = gameState.FinishedOpponentsCount + 1;
 
                 foreach (var bot in bots) 
                 {
-                    if (bot.CachedTransform.position.z > player.CachedTransform.position.z) 
+                    if (bot.IsPlaying && bot.CachedTransform.position.z > player.CachedTransform.position.z) 
                     {
                         position++;
                     }

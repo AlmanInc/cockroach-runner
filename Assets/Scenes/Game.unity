@@ -7195,7 +7195,7 @@ Transform:
   m_GameObject: {fileID: 908681983}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1000}
+  m_LocalPosition: {x: 0, y: 0, z: 1200}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7264,6 +7264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab3a4509fb8f234e86481e01d8e7bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  labelResultTime: {fileID: 35884828}
 --- !u!1001 &914514321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16458,6 +16459,7 @@ MonoBehaviour:
   bitcoinPanel: {fileID: 671819349}
   graphView: {fileID: 671819351}
   labelPlace: {fileID: 380297484}
+  labelResultTime: {fileID: 35884828}
 --- !u!4 &2003434248
 Transform:
   m_ObjectHideFlags: 0
