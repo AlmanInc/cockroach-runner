@@ -27,6 +27,10 @@ namespace CockroachRunner
         private float speed;
 
         public Transform CachedTransform => cachedTransform;
+
+        public bool IsPlaying => isPlaying;
+
+        public bool IsPlayer => isPlayer;
         
         public void ShowName() => nameObject.SetActive(true);
 

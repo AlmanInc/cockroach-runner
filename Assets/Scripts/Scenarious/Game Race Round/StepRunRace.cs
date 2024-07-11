@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using Scenario;
 using Zenject;
+using System;
 
 namespace CockroachRunner
 {
@@ -16,8 +17,11 @@ namespace CockroachRunner
         [SerializeField] private Button buttonUp;
         [SerializeField] private Button buttonDown;
 
+        [Inject] private EventsManager eventsManager;
         [Inject] private GameState gameState;
         [Inject] private GameScreenView gameScreenView;
+
+        private Coroutine raceCoroutine;
 
         private void OnEnable()
         {
@@ -34,7 +38,7 @@ namespace CockroachRunner
         public override void Play()
         {
             base.Play();
-
+                        
             SetRaceTimeLabel();
 
             gameScreenView.OpenActualPanel(InGameViews.Game);
@@ -44,19 +48,40 @@ namespace CockroachRunner
                 unit.Play();
             }
 
+            eventsManager.AddListener(GameEvents.UnitFinishedRace, UnitFinishRace);
+
+            if (raceCoroutine != null)
+            {
+                StopCoroutine(raceCoroutine);
+            }
             StartCoroutine(RaceTimeProcess());
+        }
+
+        public override void FinishStep()
+        {
+            if (raceCoroutine != null)
+            {
+                StopCoroutine(raceCoroutine);
+                raceCoroutine = null;
+            }
+
+            eventsManager.RemoveListener(GameEvents.UnitFinishedRace, UnitFinishRace);
+            base.FinishStep();
         }
 
         private IEnumerator RaceTimeProcess()
         {
-            while (gameState.RaceTime > 0f)
+            //while (gameState.RaceTime > 0f)
+            while (true)
             {
                 yield return new WaitForSeconds(1f);
-                gameState.RaceTime -= 1;
+                //gameState.RaceTime -= 1;
+                gameState.RaceTime++;
 
                 SetRaceTimeLabel();
             }
 
+            /*
             gameState.PlayerPlace = 1;
             foreach (var unit in units) 
             {
@@ -68,6 +93,30 @@ namespace CockroachRunner
             }
             
             FinishStep();
+            */
+        }
+
+        private void UnitFinishRace(object[] args)
+        {
+            UnitMovable unit = (UnitMovable)args[0];
+
+            if (unit == null)
+            {
+                Debug.LogError("Incorrect argument: StepRunRace:UnitFinishRace");
+                return;
+            }
+
+            unit.Stop();
+
+            if (unit.IsPlayer)
+            {
+                gameState.PlayerPlace = gameState.FinishedOpponentsCount + 1;
+                FinishStep();
+            }
+            else
+            {
+                gameState.FinishedOpponentsCount++;                
+            }
         }
 
         private void SetRaceTimeLabel()

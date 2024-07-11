@@ -35,7 +35,8 @@ namespace CockroachRunner
             gameScreenView.OpenActualPanel(InGameViews.ReadySetGo);
             bitcoinPanel.SetActive(true);
 
-            gameState.RaceTime = gameSettings.RaceTime;
+            gameState.RaceTime = 0;
+            gameState.FinishedOpponentsCount = 0;
 
             GenerateTreadmealsAndCockroaches();
             

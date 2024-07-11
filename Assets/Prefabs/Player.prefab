@@ -212,7 +212,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -233,6 +233,7 @@ MonoBehaviour:
   cachedTransform: {fileID: 5134733997104400481}
   center: {fileID: 6345360649533152402}
   nameObject: {fileID: 7996868585786997788}
+  isPlayer: 0
 --- !u!1 &7613908647719058091
 GameObject:
   m_ObjectHideFlags: 0

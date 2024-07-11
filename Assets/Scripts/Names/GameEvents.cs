@@ -4,6 +4,7 @@ namespace CockroachRunner
 {
     public enum GameEvents
     {
-        PlayerSetSpeed
+        PlayerSetSpeed,
+        UnitFinishedRace
     }
 }
