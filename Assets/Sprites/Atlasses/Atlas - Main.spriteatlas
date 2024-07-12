@@ -53,12 +53,18 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 743875e1da69d974daa82e0ee0f0f1a8, type: 3}
     - {fileID: 2800000, guid: faa2460aa782b5c4bb33edb0e51262e5, type: 3}
     - {fileID: 2800000, guid: b3acfba5c480aa94a8883c2ff0d3eca8, type: 3}
+    - {fileID: 2800000, guid: 1f0bf090d4361f941b54de4c8e12c840, type: 3}
+    - {fileID: 2800000, guid: 55910c01b3c37c345baa86e31e712278, type: 3}
+    - {fileID: 2800000, guid: 62375a12c61cf8a4c891fb3d93961f74, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
     packedSpriteRenderDataKeys:
+    - 1f0bf090d4361f941b54de4c8e12c840: 21300000
     - 5001e6a0c76b63f4e95158bdc4f78ddc: 21300000
+    - 55910c01b3c37c345baa86e31e712278: 21300000
     - 743875e1da69d974daa82e0ee0f0f1a8: 21300000
+    - 62375a12c61cf8a4c891fb3d93961f74: 21300000
     - f2f7eb5529d783140800cc8ccfe41dbc: 21300000
     - b3acfba5c480aa94a8883c2ff0d3eca8: 21300000
     - 5dc040f570bfb1343ac3f0961e1c0ce8: 21300000
@@ -80,8 +86,11 @@ SpriteAtlas:
     - 265fff6f79ee6994c888ebeedce3c79e: 21300000
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 1f0bf090d4361f941b54de4c8e12c840, type: 3}
   - {fileID: 21300000, guid: 5001e6a0c76b63f4e95158bdc4f78ddc, type: 3}
+  - {fileID: 21300000, guid: 55910c01b3c37c345baa86e31e712278, type: 3}
   - {fileID: 21300000, guid: 743875e1da69d974daa82e0ee0f0f1a8, type: 3}
+  - {fileID: 21300000, guid: 62375a12c61cf8a4c891fb3d93961f74, type: 3}
   - {fileID: 21300000, guid: f2f7eb5529d783140800cc8ccfe41dbc, type: 3}
   - {fileID: 21300000, guid: b3acfba5c480aa94a8883c2ff0d3eca8, type: 3}
   - {fileID: 21300000, guid: 5dc040f570bfb1343ac3f0961e1c0ce8, type: 3}
@@ -102,9 +111,12 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 5fa3637dead71a045be6c60bb56048a7, type: 3}
   - {fileID: 21300000, guid: 265fff6f79ee6994c888ebeedce3c79e, type: 3}
   m_PackedSpriteNamesToIndex:
+  - sprite-loading-background
   - panel-background-item-3
+  - sprite-loading-border
   - "\u043E\u043D\u0431\u043E\u0440\u0434\u0438\u043D\u0433 \u0433\u0435\u0439\u043C\u043F\u043B\u0435\u0439
     1"
+  - sprite-loading-fill
   - panel-background-item-1
   - panel-speed-grid
   - button-white

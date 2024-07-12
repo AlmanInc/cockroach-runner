@@ -1,0 +1,8 @@
+namespace CockroachRunner
+{
+    public static class PlayerData
+    {
+        public static string Name;
+        public static string Id;
+    }
+}
