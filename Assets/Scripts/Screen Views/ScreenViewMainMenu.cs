@@ -9,6 +9,7 @@ namespace CockroachRunner
         [Space]
         [SerializeField] private MenuGroupSwitcher menuGroupSwitcher;
         [SerializeField] private Button buttonRace;
+        [SerializeField] private Button buttonTasks;
         [SerializeField] private Button buttonAboutGame;
 
         public override void Activate()
@@ -18,6 +19,11 @@ namespace CockroachRunner
             buttonRace.onClick.AddListener(delegate
             {
                 SceneManager.LoadSceneAsync("Game");
+            });
+
+            buttonTasks.onClick.AddListener(delegate
+            {
+                menuGroupSwitcher.ShowPanel(ScreenViews.Tasks);
             });
 
             buttonAboutGame.onClick.AddListener(delegate
@@ -31,6 +37,7 @@ namespace CockroachRunner
             base.Deactivate();
 
             buttonRace.onClick.RemoveAllListeners();
+            buttonTasks.onClick.RemoveAllListeners();
             buttonAboutGame.onClick.RemoveAllListeners();
         }
     }

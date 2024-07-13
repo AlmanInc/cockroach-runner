@@ -10,6 +10,8 @@ namespace CockroachRunner
         AboutGame1,
         AboutGame2,
         AboutGame3,
-        Game
+        Game,
+        Tasks,
+        Referals
     }
 }
