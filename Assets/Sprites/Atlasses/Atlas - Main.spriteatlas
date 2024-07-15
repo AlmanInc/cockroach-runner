@@ -36,6 +36,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: f2f7eb5529d783140800cc8ccfe41dbc, type: 3}
     - {fileID: 2800000, guid: 5305124c523e90b41b538b590280bd20, type: 3}
     - {fileID: 2800000, guid: 5001e6a0c76b63f4e95158bdc4f78ddc, type: 3}
+    - {fileID: 2800000, guid: bd1b050ccb0705a40bc51dc1ee686818, type: 3}
     - {fileID: 2800000, guid: 750dac0ac1150224abd4e08285e21602, type: 3}
     - {fileID: 2800000, guid: 265fff6f79ee6994c888ebeedce3c79e, type: 3}
     - {fileID: 2800000, guid: e4bee86734e205749a18b0de3f2a7465, type: 3}
@@ -85,6 +86,7 @@ SpriteAtlas:
     - 750dac0ac1150224abd4e08285e21602: 21300000
     - 4fd16fda29de48f4bb66844c53778158: 21300000
     - 91630b5b132286f4385855bd13797415: 21300000
+    - bd1b050ccb0705a40bc51dc1ee686818: 21300000
     - cdfa004c4fb2f4e41889ea09d457dbfd: 21300000
     - 5305124c523e90b41b538b590280bd20: 21300000
     - 574b029cf6a3c6a4d87573dabbc09605: 21300000
@@ -115,6 +117,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 750dac0ac1150224abd4e08285e21602, type: 3}
   - {fileID: 21300000, guid: 4fd16fda29de48f4bb66844c53778158, type: 3}
   - {fileID: 21300000, guid: 91630b5b132286f4385855bd13797415, type: 3}
+  - {fileID: 21300000, guid: bd1b050ccb0705a40bc51dc1ee686818, type: 3}
   - {fileID: 21300000, guid: cdfa004c4fb2f4e41889ea09d457dbfd, type: 3}
   - {fileID: 21300000, guid: 5305124c523e90b41b538b590280bd20, type: 3}
   - {fileID: 21300000, guid: 574b029cf6a3c6a4d87573dabbc09605, type: 3}
@@ -144,6 +147,7 @@ SpriteAtlas:
   - image-smartphone
   - icon-bitcoin
   - sprite-squard
+  - panel-background-item-4
   - button-big-green
   - panel-background-item-2
   - icon-currency-1
