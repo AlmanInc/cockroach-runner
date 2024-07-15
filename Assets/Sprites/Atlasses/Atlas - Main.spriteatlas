@@ -47,6 +47,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 4c1f96f1f282c39449bd45192fc046b4, type: 3}
     - {fileID: 2800000, guid: 551973d5f7b1a5948a31ef2965bbe05d, type: 3}
     - {fileID: 2800000, guid: da1eaa077992f344fb48f85b19290154, type: 3}
+    - {fileID: 2800000, guid: 7551696441a4fe14f838339788915fc3, type: 3}
     - {fileID: 2800000, guid: 91630b5b132286f4385855bd13797415, type: 3}
     - {fileID: 2800000, guid: cdfa004c4fb2f4e41889ea09d457dbfd, type: 3}
     - {fileID: 2800000, guid: 951565dc21ae8174cb3542ed8e6720da, type: 3}
@@ -70,6 +71,7 @@ SpriteAtlas:
     - 55910c01b3c37c345baa86e31e712278: 21300000
     - 4c1f96f1f282c39449bd45192fc046b4: 21300000
     - 62375a12c61cf8a4c891fb3d93961f74: 21300000
+    - 7551696441a4fe14f838339788915fc3: 21300000
     - f2f7eb5529d783140800cc8ccfe41dbc: 21300000
     - b3acfba5c480aa94a8883c2ff0d3eca8: 21300000
     - 551973d5f7b1a5948a31ef2965bbe05d: 21300000
@@ -101,6 +103,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 55910c01b3c37c345baa86e31e712278, type: 3}
   - {fileID: 21300000, guid: 4c1f96f1f282c39449bd45192fc046b4, type: 3}
   - {fileID: 21300000, guid: 62375a12c61cf8a4c891fb3d93961f74, type: 3}
+  - {fileID: 21300000, guid: 7551696441a4fe14f838339788915fc3, type: 3}
   - {fileID: 21300000, guid: f2f7eb5529d783140800cc8ccfe41dbc, type: 3}
   - {fileID: 21300000, guid: b3acfba5c480aa94a8883c2ff0d3eca8, type: 3}
   - {fileID: 21300000, guid: 551973d5f7b1a5948a31ef2965bbe05d, type: 3}
@@ -131,12 +134,13 @@ SpriteAtlas:
   - sprite-loading-border
   - icon-currency-2
   - sprite-loading-fill
+  - icon-disk-2
   - panel-background-item-1
   - panel-speed-grid
   - icon-arrow
   - button-white
   - panel-top
-  - icon-disk
+  - icon-disk-1
   - sprite-circle-border
   - image-shine
   - panel-buttons-2

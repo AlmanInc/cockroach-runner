@@ -10,6 +10,11 @@ namespace CockroachRunner
         [SerializeField] private Button buttonBack;
         [SerializeField] private Button buttonTabTasks;
 
+        [Space]        
+        [SerializeField] private Text laberTotalReferals;
+        [SerializeField] private int totalReferals;
+        [SerializeField] private ScrollContentController scrollContentController;
+
         public override void Activate()
         {
             base.Activate();
@@ -23,6 +28,9 @@ namespace CockroachRunner
             {
                 menuGroupSwitcher.ShowPanel(ScreenViews.Tasks);
             });
+
+            laberTotalReferals.text = totalReferals.ToString();
+            scrollContentController.SetMaxReferalCount(totalReferals);
         }
 
         public override void Deactivate()
