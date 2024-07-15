@@ -5,7 +5,16 @@ namespace CockroachRunner
     [CreateAssetMenu(menuName = "Game Settings", fileName = "Game Settings")]
     public class GameSettings : ScriptableObject
     {
-        [Header("Base Settings")]
+        [Header("Loading")]
+        [SerializeField] private string serverName;
+        [SerializeField] private string defaultUserId;
+        [SerializeField] private string defaultUserName;
+        [SerializeField] private string addUserRequest;
+        [SerializeField] private string checkUserRequest;
+        [SerializeField] private string connectReferalWithUserRequest;
+        [SerializeField] private string getAllReferalsRequest;
+
+        [Header("Race")]
         [SerializeField] private float backCountTimeToStartRace = 3f;
         [SerializeField] private int raceTime = 60;
         [SerializeField] private float baseRunningSpeed = 5f;
@@ -20,6 +29,24 @@ namespace CockroachRunner
         [Space]
         [SerializeField] private Cockroach[] cockroachPrefabs;
 
+
+        // Loading
+        public string ServerName => serverName;
+
+        public string DefaultUserId => defaultUserId;
+
+        public string DefaultUserName => defaultUserName;
+
+        public string AddUserRequest => addUserRequest;
+        
+        public string CheckUserRequest => checkUserRequest;
+
+        public string ConnectReferalWithUserRequest => connectReferalWithUserRequest;
+
+        public string GetAllReferalsRequest => getAllReferalsRequest;
+
+
+        // Other
         public float BackCountTimeToStartRace => backCountTimeToStartRace;
 
         public int RaceTime => raceTime;

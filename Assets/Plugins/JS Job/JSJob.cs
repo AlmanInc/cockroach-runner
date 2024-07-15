@@ -9,11 +9,16 @@ namespace CockroachRunner
 
         public string UserId { get; private set; }
 
+        public string UserRefId { get; private set; }
+
         [DllImport("__Internal")]
         private static extern void GetUserName();
 
         [DllImport("__Internal")]
         private static extern void GetUserId();
+
+        [DllImport ("__Internal")]
+        private static extern void GetUserRef();
 
         public void LoadUserName(string userName)
         {
@@ -25,8 +30,15 @@ namespace CockroachRunner
             UserId = userId;
         }
 
-        public void GetTelegramUserName() => GetUserName();
+        public void LoadUserRefId(string refId)
+        {
+            UserRefId = refId;
+        }
+        
+        public void TryGetUserName() => GetUserName();
 
-        public void GetTelegramUserId() => GetUserId();
+        public void TryGetUserId() => GetUserId();
+
+        public void TryGetUserRefId() => GetUserRef();
     }
 }

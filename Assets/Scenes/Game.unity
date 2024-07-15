@@ -2629,7 +2629,8 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 249923382}
-  _installerPrefabs: []
+  _installerPrefabs:
+  - {fileID: 6806904024745932885, guid: dcff87afb7755ee49a3879b9c4447e99, type: 3}
   _autoRun: 1
   OnPreInstall:
     m_PersistentCalls:
@@ -2673,7 +2674,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed0206c9e6ff1c48ae88ca1bc8af24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSettings: {fileID: 11400000, guid: e859ca9bf8d86bc4799aba825798da1c, type: 2}
   gameScreenView: {fileID: 2069241621}
   graphView: {fileID: 671819351}
 --- !u!1 &260688469
