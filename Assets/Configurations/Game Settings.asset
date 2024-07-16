@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultUserId: 15
   defaultUserName: Player
+  referalLink: https://cockroach-run.ru/game/?ref_id={id}
   serverName: cockroach-run.ru
   requestAddUser:
     request: https://{server}/dal/add_user?id={id}&name={name}

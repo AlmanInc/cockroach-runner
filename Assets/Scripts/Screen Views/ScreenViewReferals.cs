@@ -1,5 +1,6 @@
 using UnityEngine.UI;
 using UnityEngine;
+using Zenject;
 
 namespace CockroachRunner
 {
@@ -15,6 +16,12 @@ namespace CockroachRunner
         [SerializeField] private int totalReferals;
         [SerializeField] private ScrollContentController scrollContentController;
 
+        [Space]
+        [SerializeField] private Text labelReferalLink;
+        [SerializeField] private Button buttonCopyLink;
+
+        [Inject] private GameSettings gameSettings;
+
         public override void Activate()
         {
             base.Activate();
@@ -29,8 +36,17 @@ namespace CockroachRunner
                 menuGroupSwitcher.ShowPanel(ScreenViews.Tasks);
             });
 
+            buttonCopyLink.onClick.AddListener(delegate
+            {
+                GUIUtility.systemCopyBuffer = labelReferalLink.text;
+            });
+
             laberTotalReferals.text = totalReferals.ToString();
             scrollContentController.SetMaxReferalCount(totalReferals);
+
+            string referalLink = gameSettings.ReferalLink;
+            referalLink = referalLink.Replace("{id}", PlayerData.Id);
+            labelReferalLink.text = referalLink;
         }
 
         public override void Deactivate()
@@ -39,6 +55,7 @@ namespace CockroachRunner
 
             buttonBack.onClick.RemoveAllListeners();
             buttonTabTasks.onClick.RemoveAllListeners();
+            buttonCopyLink.onClick.RemoveAllListeners();
         }
     }
 }

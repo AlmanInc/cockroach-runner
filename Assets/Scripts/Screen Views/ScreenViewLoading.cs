@@ -87,9 +87,13 @@ namespace CockroachRunner
             }
 
             yield return SendRequest(gameSettings.GetAllReferalsRequest, logRequests);
+            if (requestDone)
+            {                
+                GetReferalsResponseData referalsData = JsonUtility.FromJson<GetReferalsResponseData>(response);
+                PlayerData.Referals = referalsData.referals;
+            }
             yield return ToProgressAnimationProcess(0.6f, 0.1f);
-            //Debug.Log(response);
-
+            
             yield return RestProgressLoadingProcess(time);
 
             SceneManager.LoadSceneAsync("Menu");

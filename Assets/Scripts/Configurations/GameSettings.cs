@@ -8,6 +8,7 @@ namespace CockroachRunner
         [Header("Server and Initialization")]
         [SerializeField] private string defaultUserId;
         [SerializeField] private string defaultUserName;
+        [SerializeField] private string referalLink;
         [SerializeField] private string serverName;
         [SerializeField] private RequestData requestAddUser;
         [SerializeField] private RequestData requestCheckUser;
@@ -36,6 +37,8 @@ namespace CockroachRunner
         public string DefaultUserId => defaultUserId;
 
         public string DefaultUserName => defaultUserName;
+
+        public string ReferalLink => referalLink;
 
         public RequestData AddUserRequest => requestAddUser;
         
