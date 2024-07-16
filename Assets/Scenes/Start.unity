@@ -288,7 +288,7 @@ MonoBehaviour:
   minimumDuration: 0.8
   labelUserName: {fileID: 1549098006}
   labelLog: {fileID: 1019367313}
-  logRequests: 1
+  logRequests: 0
 --- !u!1 &632642972
 GameObject:
   m_ObjectHideFlags: 0

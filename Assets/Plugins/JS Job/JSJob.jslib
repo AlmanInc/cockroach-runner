@@ -19,7 +19,7 @@ mergeInto(LibraryManager.library,
 		userId = tg.initDataUnsafe.user.id;
 			
 		myGameInstance.SendMessage('JSJob', 'LoadUserId', userId);
-	}
+	},
 	
 	GetUserRef: function()
 	{

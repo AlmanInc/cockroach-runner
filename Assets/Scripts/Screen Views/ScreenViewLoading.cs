@@ -68,19 +68,27 @@ namespace CockroachRunner
             else
             {
                 // Реферальная ссылка
+                CheckUserResponseData checkUserData = null;
                 yield return SendRequest(gameSettings.CheckUserRequest, logRequests);
-
+                
                 if (requestDone)
                 {
-
+                    checkUserData = JsonUtility.FromJson<CheckUserResponseData>(response);
+                    yield return ToProgressAnimationProcess(0.4f, 0.1f);
                 }
 
                 yield return SendRequest(gameSettings.AddUserRequest, logRequests);
-                yield return SendRequest(gameSettings.ConnectReferalWithUserRequest, logRequests);
+                yield return ToProgressAnimationProcess(0.5f, 0.1f);
+
+                if (checkUserData != null && checkUserData.exist == false)
+                {
+                    yield return SendRequest(gameSettings.ConnectReferalWithUserRequest, logRequests);
+                }
             }
 
             yield return SendRequest(gameSettings.GetAllReferalsRequest, logRequests);
-            Debug.Log(response);
+            yield return ToProgressAnimationProcess(0.6f, 0.1f);
+            //Debug.Log(response);
 
             yield return RestProgressLoadingProcess(time);
 
