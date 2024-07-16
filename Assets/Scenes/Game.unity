@@ -7330,10 +7330,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   candlesCointainer: {fileID: 58961912}
   trand: {fileID: 1146263641}
-  startMinPrice: 56.5
-  startMaxPrice: 59.125
+  startMinPrice: 60.027
+  startMaxPrice: 68.169
   timeFrame: 3
-  startPrice: 57.607
+  startPrice: 63.414
   currentPriceLine: {fileID: 8280263118731629439}
   lines:
   - {fileID: 1664097755071184594}
@@ -11346,7 +11346,7 @@ MonoBehaviour:
   candleBaseValue: 1.2
   tickMinFactor: 0.005
   tickMaxFactor: 0.012
-  trandChance: 50
+  trandChance: 51
 --- !u!4 &1176719114 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1030995998, guid: abc00000000001326632472317349629, type: 3}

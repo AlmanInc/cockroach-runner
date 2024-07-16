@@ -12,13 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 937174b2a0ac35f4299821f3567233c0, type: 3}
   m_Name: Game Settings
   m_EditorClassIdentifier: 
-  serverName: https://cockroach-run.ru
   defaultUserId: 15
   defaultUserName: Player
-  addUserRequest: https://{server}/dal/add_user?id={id}&name={name}
-  checkUserRequest: https://{server}/dal/check_exist?id={id}
-  connectReferalWithUserRequest: https://{server}/dal/add_referal?id={id}
-  getAllReferalsRequest: http://{server}/dal/get_referal?id={id}
+  serverName: cockroach-run.ru
+  requestAddUser:
+    request: https://{server}/dal/add_user?id={id}&name={name}
+    kind: 0
+  requestCheckUser:
+    request: https://{server}/dal/check_exist?id={id}
+    kind: 0
+  requestConnectReferalWithUser:
+    request: https://{server}/dal/add_referal?id={id}&referal_id={referal_id}
+    kind: 0
+  requestGetAllReferals:
+    request: https://{server}/dal/get_referal?id={id}
+    kind: 0
   backCountTimeToStartRace: 3
   raceTime: 60
   baseRunningSpeed: 10

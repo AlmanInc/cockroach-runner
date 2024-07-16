@@ -5,15 +5,15 @@ namespace CockroachRunner
     [CreateAssetMenu(menuName = "Game Settings", fileName = "Game Settings")]
     public class GameSettings : ScriptableObject
     {
-        [Header("Loading")]
-        [SerializeField] private string serverName;
+        [Header("Server and Initialization")]
         [SerializeField] private string defaultUserId;
         [SerializeField] private string defaultUserName;
-        [SerializeField] private string addUserRequest;
-        [SerializeField] private string checkUserRequest;
-        [SerializeField] private string connectReferalWithUserRequest;
-        [SerializeField] private string getAllReferalsRequest;
-
+        [SerializeField] private string serverName;
+        [SerializeField] private RequestData requestAddUser;
+        [SerializeField] private RequestData requestCheckUser;
+        [SerializeField] private RequestData requestConnectReferalWithUser;
+        [SerializeField] private RequestData requestGetAllReferals;
+        
         [Header("Race")]
         [SerializeField] private float backCountTimeToStartRace = 3f;
         [SerializeField] private int raceTime = 60;
@@ -37,13 +37,13 @@ namespace CockroachRunner
 
         public string DefaultUserName => defaultUserName;
 
-        public string AddUserRequest => addUserRequest;
+        public RequestData AddUserRequest => requestAddUser;
         
-        public string CheckUserRequest => checkUserRequest;
+        public RequestData CheckUserRequest => requestCheckUser;
 
-        public string ConnectReferalWithUserRequest => connectReferalWithUserRequest;
+        public RequestData ConnectReferalWithUserRequest => requestConnectReferalWithUser;
 
-        public string GetAllReferalsRequest => getAllReferalsRequest;
+        public RequestData GetAllReferalsRequest => requestGetAllReferals;
 
 
         // Other

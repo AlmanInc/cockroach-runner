@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 using Zenject;
+using UnityEngine.Networking;
 
 namespace CockroachRunner
 {
@@ -16,8 +17,12 @@ namespace CockroachRunner
         [Space]
         [SerializeField] private Text labelUserName;
         [SerializeField] private Text labelLog;
+        [SerializeField] private bool logRequests;
 
         [Inject] private GameSettings gameSettings;
+
+        private bool requestDone;
+        private string response;
         
         private float progress;
         private float Progress
@@ -54,6 +59,28 @@ namespace CockroachRunner
             yield return GetUserNameProcess(0.1f, 0.1f, isUnityLoading);
             yield return GetUserIdProcess(0.2f, 0.1f, isUnityLoading);
             yield return GetOwnerRefIdForCurrentUser(0.3f, 0.1f, isUnityLoading);
+
+            if (string.IsNullOrEmpty(PlayerData.OwnerRefId))
+            {
+                yield return SendRequest(gameSettings.AddUserRequest, logRequests);
+                yield return ToProgressAnimationProcess(0.4f, 0.1f);
+            }
+            else
+            {
+                // Реферальная ссылка
+                yield return SendRequest(gameSettings.CheckUserRequest, logRequests);
+
+                if (requestDone)
+                {
+
+                }
+
+                yield return SendRequest(gameSettings.AddUserRequest, logRequests);
+                yield return SendRequest(gameSettings.ConnectReferalWithUserRequest, logRequests);
+            }
+
+            yield return SendRequest(gameSettings.GetAllReferalsRequest, logRequests);
+            Debug.Log(response);
 
             yield return RestProgressLoadingProcess(time);
 
@@ -113,9 +140,48 @@ namespace CockroachRunner
             yield return ToProgressAnimationProcess(partOfProgress, toProgressDuration);
         }
 
+        private IEnumerator SendRequest(RequestData requestData, bool logRequest)
+        {
+            requestDone = false;
+            response = string.Empty;
 
+            string request = ConfigureRequest(requestData.request);
 
+            if (logRequest)
+            {
+                Debug.Log(request);
+            }
 
+            using (UnityWebRequest webRequest = UnityWebRequest.Get(request)) 
+            {
+                yield return webRequest.SendWebRequest();
+
+                if (webRequest.result == UnityWebRequest.Result.Success)
+                {
+                    requestDone = true;
+                    response = webRequest.downloadHandler.text;
+                }
+                else
+                {
+                    requestDone = false;                    
+                    Debug.LogError(webRequest.error);
+                }
+            }
+        }
+
+        
+
+        private string ConfigureRequest(string request) 
+        {
+            string result = request.Replace("{server}", gameSettings.ServerName);
+            result = result.Replace("{name}", PlayerData.Name);
+            result = result.Replace("{id}", PlayerData.Id);
+            result = result.Replace("{referal_id}", PlayerData.OwnerRefId);
+
+            return result;
+        }
+
+        // Old code
         private IEnumerator LoadUnityProcess()
         {
             labelLog.text = "Unity";
