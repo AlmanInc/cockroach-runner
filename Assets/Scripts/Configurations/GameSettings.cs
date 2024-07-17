@@ -10,9 +10,10 @@ namespace CockroachRunner
         [SerializeField] private string defaultUserName;
         [SerializeField] private string referalLink;
         [SerializeField] private string serverName;
-        [SerializeField] private RequestData requestAddUser;
         [SerializeField] private RequestData requestCheckUser;
-        [SerializeField] private RequestData requestConnectReferalWithUser;
+        [SerializeField] private RequestData requestUpdateUser;
+        [SerializeField] private RequestData requestAddUser;
+        [SerializeField] private RequestData requestAddReferalForUser;
         [SerializeField] private RequestData requestGetAllReferals;
         [SerializeField] private RequestData requestGetPrice;
         
@@ -41,11 +42,13 @@ namespace CockroachRunner
 
         public string ReferalLink => referalLink;
 
-        public RequestData AddUserRequest => requestAddUser;
-        
         public RequestData CheckUserRequest => requestCheckUser;
 
-        public RequestData ConnectReferalWithUserRequest => requestConnectReferalWithUser;
+        public RequestData UpdateUserRequest => requestUpdateUser;
+
+        public RequestData AddUserRequest => requestAddUser;
+
+        public RequestData AddReferalForUserRequest => requestAddReferalForUser;
 
         public RequestData GetAllReferalsRequest => requestGetAllReferals;
 

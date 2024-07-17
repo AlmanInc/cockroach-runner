@@ -16,13 +16,16 @@ MonoBehaviour:
   defaultUserName: Player
   referalLink: https://t.me/CockroachTestBot/cockroach_test_game/?startapp={id}
   serverName: cockroach-run.ru
-  requestAddUser:
-    request: https://{server}/dal/add_user?id={id}&name={name}
-    kind: 0
   requestCheckUser:
     request: https://{server}/dal/check_exist?id={id}
     kind: 0
-  requestConnectReferalWithUser:
+  requestUpdateUser:
+    request: https://{server}/dal/update_user?id={id}&name={name}
+    kind: 0
+  requestAddUser:
+    request: https://{server}/dal/add_user?id={id}&name={name}
+    kind: 0
+  requestAddReferalForUser:
     request: https://{server}/dal/add_referal?id={id}&referal_id={referal_id}
     kind: 0
   requestGetAllReferals:

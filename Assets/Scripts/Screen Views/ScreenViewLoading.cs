@@ -56,43 +56,85 @@ namespace CockroachRunner
             yield return GetUserIdProcess(0.2f, 0.1f, isUnityLoading);
             yield return GetOwnerRefIdForCurrentUser(0.3f, 0.1f, isUnityLoading);
 
-            if (string.IsNullOrEmpty(PlayerData.OwnerRefId))
+                        
+            yield return SendRequest(gameSettings.CheckUserRequest, logRequests);            
+            CheckUserResponseData checkUserData = JsonUtility.FromJson<CheckUserResponseData>(response);
+            yield return ToProgressAnimationProcess(0.4f, 0.1f);
+
+            if (checkUserData.exist)
             {
-                yield return SendRequest(gameSettings.AddUserRequest, logRequests);
-                yield return ToProgressAnimationProcess(0.4f, 0.1f);
+                yield return SendRequest(gameSettings.UpdateUserRequest, logRequests);
+                yield return ToProgressAnimationProcess(0.6f, 0.2f);
             }
             else
             {
-                // Реферальная ссылка
-                CheckUserResponseData checkUserData = null;
-                yield return SendRequest(gameSettings.CheckUserRequest, logRequests);
-                
-                if (requestDone)
+                if (string.IsNullOrEmpty(PlayerData.OwnerRefId))
                 {
-                    checkUserData = JsonUtility.FromJson<CheckUserResponseData>(response);
-                    yield return ToProgressAnimationProcess(0.4f, 0.1f);
+                    // Не реферальная ссылка
+                    yield return SendRequest(gameSettings.AddUserRequest, logRequests);
+                    yield return ToProgressAnimationProcess(0.6f, 0.2f);
                 }
-
-                yield return SendRequest(gameSettings.AddUserRequest, logRequests);
-                yield return ToProgressAnimationProcess(0.5f, 0.1f);
-
-                if (checkUserData != null && checkUserData.exist == false)
+                else
                 {
-                    yield return SendRequest(gameSettings.ConnectReferalWithUserRequest, logRequests);
+                    // Реферальная ссылка
+                    yield return SendRequest(gameSettings.AddUserRequest, logRequests);
+                    yield return ToProgressAnimationProcess(0.5f, 0.1f);
+
+                    yield return SendRequest(gameSettings.AddReferalForUserRequest, logRequests);
+                    yield return ToProgressAnimationProcess(0.6f, 0.1f);
                 }
             }
+            
+                        
+
+                        /*
+                        if (string.IsNullOrEmpty(PlayerData.OwnerRefId))
+                        {
+                            yield return SendRequest(gameSettings.AddUserRequest, logRequests);
+                            yield return ToProgressAnimationProcess(0.4f, 0.1f);
+                        }
+                        else
+                        {
+                            // Реферальная ссылка
+                            CheckUserResponseData checkUserData = null;
+                            yield return SendRequest(gameSettings.CheckUserRequest, logRequests);
+
+                            if (requestDone)
+                            {
+                                checkUserData = JsonUtility.FromJson<CheckUserResponseData>(response);
+                                yield return ToProgressAnimationProcess(0.4f, 0.1f);
+                            }
+
+                            yield return SendRequest(gameSettings.AddUserRequest, logRequests);
+                            yield return ToProgressAnimationProcess(0.5f, 0.1f);
+
+                            if (checkUserData != null && checkUserData.exist == false)
+                            {
+                                yield return SendRequest(gameSettings.AddReferalForUserRequest, logRequests);
+                            }
+                        }
+                        */
 
             yield return SendRequest(gameSettings.GetAllReferalsRequest, logRequests);
-            if (requestDone)
-            {                
-                GetReferalsResponseData referalsData = JsonUtility.FromJson<GetReferalsResponseData>(response);
-                PlayerData.Referals = referalsData.referals;
-            }
-            yield return ToProgressAnimationProcess(0.6f, 0.1f);
+            GetReferalsResponseData referalsData = JsonUtility.FromJson<GetReferalsResponseData>(response);
+            PlayerData.Referals = referalsData.referals;
+            yield return ToProgressAnimationProcess(0.7f, 0.1f);
             
             yield return RestProgressLoadingProcess(time);
 
             SceneManager.LoadSceneAsync("Menu");
+        }
+
+        private IEnumerator ShowErrorProcess(string message)
+        {
+            labelLog.text = message;
+            labelLog.gameObject.SetActive(true);
+            labelLog.enabled = true;
+
+            while (true)
+            {
+                yield return null;
+            }
         }
 
         private IEnumerator GetUserNameProcess(float partOfProgress, float toProgressDuration, bool isUnityLoading) 
@@ -152,7 +194,7 @@ namespace CockroachRunner
 
         private IEnumerator SendRequest(RequestData requestData, bool logRequest)
         {
-            requestDone = false;
+            //requestDone = false;
             response = string.Empty;
 
             string request = ConfigureRequest(requestData.request);
@@ -168,13 +210,14 @@ namespace CockroachRunner
 
                 if (webRequest.result == UnityWebRequest.Result.Success)
                 {
-                    requestDone = true;
+                    //requestDone = true;
                     response = webRequest.downloadHandler.text;
                 }
                 else
                 {
-                    requestDone = false;                    
+                    //requestDone = false;                    
                     Debug.LogError(webRequest.error);
+                    yield return ShowErrorProcess(webRequest.error);
                 }
             }
         }

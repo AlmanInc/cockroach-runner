@@ -5,7 +5,8 @@ mergeInto(LibraryManager.library,
 		let tg = window.Telegram.WebApp;
 		
 		var userName = '';
-		userName = tg.initDataUnsafe.user.username;
+		//userName = tg.initDataUnsafe.user.username;
+		userName = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
 		userName = userName.toString();
 		
 		// Object-method-args
