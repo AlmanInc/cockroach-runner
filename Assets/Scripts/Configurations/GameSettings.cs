@@ -14,6 +14,7 @@ namespace CockroachRunner
         [SerializeField] private RequestData requestCheckUser;
         [SerializeField] private RequestData requestConnectReferalWithUser;
         [SerializeField] private RequestData requestGetAllReferals;
+        [SerializeField] private RequestData requestGetPrice;
         
         [Header("Race")]
         [SerializeField] private float backCountTimeToStartRace = 3f;
@@ -47,6 +48,8 @@ namespace CockroachRunner
         public RequestData ConnectReferalWithUserRequest => requestConnectReferalWithUser;
 
         public RequestData GetAllReferalsRequest => requestGetAllReferals;
+
+        public RequestData GetPriceRequest => requestGetPrice;
 
 
         // Other

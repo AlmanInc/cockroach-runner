@@ -13,10 +13,10 @@ namespace CockroachRunner
 
         [Space]        
         [SerializeField] private Text laberTotalReferals;
-        [SerializeField] private int totalReferals;
         [SerializeField] private ScrollContentController scrollContentController;
 
         [Space]
+        [SerializeField] private JSJob jsJob;
         [SerializeField] private Text labelReferalLink;
         [SerializeField] private Button buttonCopyLink;
 
@@ -38,11 +38,27 @@ namespace CockroachRunner
 
             buttonCopyLink.onClick.AddListener(delegate
             {
-                GUIUtility.systemCopyBuffer = labelReferalLink.text;
+                bool isUnity = true;
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+                isUnity = false;
+#else
+                isUnity = true;
+#endif
+                if (isUnity)
+                {
+                    GUIUtility.systemCopyBuffer = labelReferalLink.text;
+                    Debug.Log("Unity");
+                }
+                else
+                {
+                    jsJob.TryCopyReferalLink(labelReferalLink.text);
+                }
             });
 
-            laberTotalReferals.text = totalReferals.ToString();
-            scrollContentController.SetMaxReferalCount(totalReferals);
+            int referalAmount = PlayerData.Referals == null ? 0 : PlayerData.Referals.Length;
+            laberTotalReferals.text = $"{referalAmount}";
+            scrollContentController.SetMaxReferalCount(referalAmount);
 
             string referalLink = gameSettings.ReferalLink;
             referalLink = referalLink.Replace("{id}", PlayerData.Id);

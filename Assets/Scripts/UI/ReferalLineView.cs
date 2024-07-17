@@ -15,7 +15,9 @@ namespace CockroachRunner
         public void SetData(int index)
         {
             Index = index;
-            labelUserName.text = $"Player {index + 1}";
+
+            UserData data = PlayerData.Referals[index];
+            labelUserName.text = data.name;
         }
     }
 }

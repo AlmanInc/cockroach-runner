@@ -59,8 +59,8 @@ namespace CockroachRunner
             Cockroach prefab = prefabs[cockroachGrabber.NexIndex()];
 
             player.AddCockroach(Instantiate<Cockroach>(prefab));
-            player.ShowName();
-                        
+            //player.ShowName();
+            
             for (int i = 0; i < bots.Length; i++)
             {
                 unitIndex = treadmillsGrabber.NexIndex();

@@ -36,14 +36,10 @@ namespace CockroachRunner
         }
 
         private void Start()
-        {
-            //Progress = 0f;
-
+        {            
 #if UNITY_WEBGL && !UNITY_EDITOR
-            //StartCoroutine(LoadWebProcess());
             StartCoroutine(LoadApplicationProcess(false));
 #else
-            //StartCoroutine(LoadUnityProcess());
             StartCoroutine(LoadApplicationProcess(true));
 #endif            
         }
@@ -131,6 +127,8 @@ namespace CockroachRunner
                 jsJob.TryGetUserId();
                 PlayerData.Id = jsJob.UserId;
             }
+
+            labelLog.text = $"id = ({PlayerData.Id})";
             
             yield return ToProgressAnimationProcess(partOfProgress, toProgressDuration);
         }
@@ -192,63 +190,7 @@ namespace CockroachRunner
 
             return result;
         }
-
-        // Old code
-        private IEnumerator LoadUnityProcess()
-        {
-            labelLog.text = "Unity";
-
-            float time = Time.time;
-
-            PlayerData.Name = gameSettings.DefaultUserName;
-            PlayerData.Id = gameSettings.DefaultUserId;
-            yield return ToProgressAnimationProcess(0.2f, 0.1f);         
-
-            yield return RestProgressLoadingProcess(time);
-                        
-            SceneManager.LoadSceneAsync("Menu");
-        }
-
-        private IEnumerator LoadWebProcess()
-        {
-            labelLog.text = "Web App";
-            
-            float time = Time.time;
-
-            // Get User Name
-            yield return new WaitForEndOfFrame();
-            jsJob.TryGetUserName();
-            yield return new WaitForEndOfFrame();
-            
-            PlayerData.Name = jsJob.UserName;
-            labelUserName.text = PlayerData.Name;
-            Progress = 0.1f;
-
-
-            // Get User Id
-            yield return new WaitForEndOfFrame();
-            jsJob.TryGetUserId();
-            yield return new WaitForEndOfFrame();
-
-            PlayerData.Id = jsJob.UserId;                        
-            Progress = 0.2f;
-
-
-            // Check loading application link as referal link
-            yield return new WaitForEndOfFrame();
-            jsJob.TryGetUserRefId();
-            yield return new WaitForEndOfFrame();
-
-            PlayerData.OwnerRefId = jsJob.UserRefId;
-            Progress = 0.3f;
-
-
-            // Rest Loading
-            yield return RestProgressLoadingProcess(time);
-
-            SceneManager.LoadSceneAsync("Menu");
-        }
-
+        
         private IEnumerator ToProgressAnimationProcess(float progressTarget, float duration)
         {
             float startProgress = Progress;

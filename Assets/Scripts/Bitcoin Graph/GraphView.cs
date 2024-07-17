@@ -35,15 +35,35 @@ namespace CockroachRunner
 
         public float CurrentPrice => price;
 
-        private void Start()
+        private IEnumerator Start()
         {
             candles = new List<CandleView>();
             freeCandles = new List<CandleView>();
-            price = startPrice;
 
-            minPrice = startMinPrice;
-            maxPrice = startMaxPrice;
-            SetNewMinMaxPrices(minPrice, maxPrice);
+            if (!trand.RealTimePrice)
+            {
+                price = startPrice;
+                minPrice = startMinPrice;
+                maxPrice = startMaxPrice;
+                SetNewMinMaxPrices(minPrice, maxPrice);
+            }
+            else
+            {
+                price = 0f;
+
+                while (price == 0f)
+                {
+                    yield return null;
+                    price = trand.Next();
+                }
+
+                float factor = 0.005f;
+                //minPrice = price - price * factor;
+                //maxPrice = price + price * factor;
+                minPrice = price - 90f;
+                maxPrice = price + 90f;
+                SetNewMinMaxPrices(minPrice, maxPrice);
+            }
 
             StartCoroutine(DrawCandlesProcess());
         }
@@ -55,7 +75,7 @@ namespace CockroachRunner
             for (int i = 0; i < lines.Length; i++)
             {
                 float price = max - i * priceStep;
-                lines[i].LabelPrice.text = string.Format("{0:0.000}", price);
+                lines[i].LabelPrice.text = string.Format("{0:0.0}", price);
             }
         }
 
@@ -69,7 +89,10 @@ namespace CockroachRunner
         {
             yield return new WaitForEndOfFrame();
 
-            price = startPrice;
+            //if (!trand.RealTimePrice)
+            //{
+            //    price = startPrice;
+            //}
 
             float time = timeFrame;
 
@@ -84,7 +107,15 @@ namespace CockroachRunner
             {
 
                 yield return new WaitForEndOfFrame();
-                price += trand.Next();
+                
+                if (trand.RealTimePrice)
+                {
+                    price = trand.Next();
+                }
+                else
+                {
+                    price += trand.Next();
+                }
 
                 DrawPriceLine(currentPriceLine);
 
@@ -177,7 +208,7 @@ namespace CockroachRunner
             position.y = GetPriceYPosition(price);
             line.transform.position = position;
 
-            line.LabelPrice.text = string.Format("{0:0.000}", price);
+            line.LabelPrice.text = string.Format("{0:0.0}", price);
         }
 
         public void Clear()
