@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature.002|run_normal
+      name: Run
       takeName: Armature.002|run_normal
       internalID: 3388143832479586409
       firstFrame: 0
