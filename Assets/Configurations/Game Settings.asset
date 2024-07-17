@@ -34,6 +34,13 @@ MonoBehaviour:
   requestGetPrice:
     request: https://cockroach-run.ru/dal/get_cur_course
     kind: 0
+  requestGetCurrency:
+    request: https://{server}/dal/get_balance?id={id}
+    kind: 0
+  requestAddCurrency:
+    request: https://{server}/dal/add_balance?id={id}&balance={currency}
+    kind: 0
+  raceBet: 100
   backCountTimeToStartRace: 3
   raceTime: 60
   baseRunningSpeed: 10

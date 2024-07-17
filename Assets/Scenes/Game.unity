@@ -20086,6 +20086,7 @@ MonoBehaviour:
   graphView: {fileID: 671819351}
   labelPlace: {fileID: 380297484}
   labelResultTime: {fileID: 35884828}
+  laberReward: {fileID: 1583604327}
 --- !u!4 &2003434248
 Transform:
   m_ObjectHideFlags: 0

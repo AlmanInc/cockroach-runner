@@ -499,6 +499,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5872665071145669419}
+  - component: {fileID: 2809414095072658000}
   m_Layer: 5
   m_Name: Wallet Panel
   m_TagString: Untagged
@@ -526,6 +527,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 70}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &2809414095072658000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8561754883913634756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ee1ac40a0a8c14680ef28cb9592c94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonAddCurrency: {fileID: 6735925057860722974}
+  labelCurrency: {fileID: 1260650263130739057}
+  addCurrencyAmount: 50
 --- !u!1 &8687202424158264816
 GameObject:
   m_ObjectHideFlags: 0

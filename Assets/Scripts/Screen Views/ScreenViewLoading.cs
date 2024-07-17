@@ -10,6 +10,7 @@ namespace CockroachRunner
     public class ScreenViewLoading : BaseScreenView
     {
         [Space]
+        [SerializeField] private WalletService walletService;
         [SerializeField] private JSJob jsJob;        
         [SerializeField] private ProgressBarView progressBar;
         [SerializeField] private float minimumDuration = 1f;
@@ -85,41 +86,17 @@ namespace CockroachRunner
                 }
             }
             
-                        
-
-                        /*
-                        if (string.IsNullOrEmpty(PlayerData.OwnerRefId))
-                        {
-                            yield return SendRequest(gameSettings.AddUserRequest, logRequests);
-                            yield return ToProgressAnimationProcess(0.4f, 0.1f);
-                        }
-                        else
-                        {
-                            // Реферальная ссылка
-                            CheckUserResponseData checkUserData = null;
-                            yield return SendRequest(gameSettings.CheckUserRequest, logRequests);
-
-                            if (requestDone)
-                            {
-                                checkUserData = JsonUtility.FromJson<CheckUserResponseData>(response);
-                                yield return ToProgressAnimationProcess(0.4f, 0.1f);
-                            }
-
-                            yield return SendRequest(gameSettings.AddUserRequest, logRequests);
-                            yield return ToProgressAnimationProcess(0.5f, 0.1f);
-
-                            if (checkUserData != null && checkUserData.exist == false)
-                            {
-                                yield return SendRequest(gameSettings.AddReferalForUserRequest, logRequests);
-                            }
-                        }
-                        */
-
             yield return SendRequest(gameSettings.GetAllReferalsRequest, logRequests);
             GetReferalsResponseData referalsData = JsonUtility.FromJson<GetReferalsResponseData>(response);
             PlayerData.Referals = referalsData.referals;
             yield return ToProgressAnimationProcess(0.7f, 0.1f);
-            
+
+            walletService.GetCurrency();
+            yield return new WaitWhile(() => walletService.IsLocked);
+
+            yield return ToProgressAnimationProcess(0.75f, 0.05f);
+
+
             yield return RestProgressLoadingProcess(time);
 
             SceneManager.LoadSceneAsync("Menu");

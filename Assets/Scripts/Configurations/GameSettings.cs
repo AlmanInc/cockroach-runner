@@ -16,8 +16,11 @@ namespace CockroachRunner
         [SerializeField] private RequestData requestAddReferalForUser;
         [SerializeField] private RequestData requestGetAllReferals;
         [SerializeField] private RequestData requestGetPrice;
-        
+        [SerializeField] private RequestData requestGetCurrency;
+        [SerializeField] private RequestData requestAddCurrency;
+
         [Header("Race")]
+        [SerializeField] private int raceBet;
         [SerializeField] private float backCountTimeToStartRace = 3f;
         [SerializeField] private int raceTime = 60;
         [SerializeField] private float baseRunningSpeed = 5f;
@@ -54,8 +57,14 @@ namespace CockroachRunner
 
         public RequestData GetPriceRequest => requestGetPrice;
 
+        public RequestData GetCurrencyRequest => requestGetCurrency;
+
+        public RequestData AddCurrencyRequest => requestAddCurrency;
+
 
         // Other
+        public int RaceBet => raceBet;
+
         public float BackCountTimeToStartRace => backCountTimeToStartRace;
 
         public int RaceTime => raceTime;

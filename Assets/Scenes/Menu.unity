@@ -11141,6 +11141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenViewPanel: {fileID: 496900807}
+  jsJob: {fileID: 1486158944}
   menuGroupSwitcher: {fileID: 1415605178}
   buttonRace: {fileID: 684263224}
   buttonTasks: {fileID: 290809154}

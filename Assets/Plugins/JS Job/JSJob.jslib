@@ -6,7 +6,9 @@ mergeInto(LibraryManager.library,
 		
 		var userName = '';
 		//userName = tg.initDataUnsafe.user.username;
-		userName = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
+		//userName = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name}`;
+		
+		userName = tg.initDataUnsafe.user.first_name;
 		userName = userName.toString();
 		
 		// Object-method-args
