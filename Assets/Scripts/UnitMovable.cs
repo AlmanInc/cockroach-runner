@@ -17,6 +17,7 @@ namespace CockroachRunner
         
         private Coroutine runCoroutine;
         private Coroutine speedCoroutine;
+        private Coroutine predictionCoroutine;
         private bool isPlaying;
 
         private Cockroach cockroach;
@@ -33,25 +34,24 @@ namespace CockroachRunner
         public bool IsPlayer => isPlayer;
         
         public void ShowName() => nameObject.SetActive(true);
-
+                
         public void Play()
         {
             if (isPlaying)
             {
                 return;
             }
-            
-            if (runCoroutine != null)
-            {
-                StopCoroutine(runCoroutine);
-            }
-                        
-            runCoroutine = StartCoroutine(RunProcess());
-            speedCoroutine = StartCoroutine(SpeedProcess());
 
+            SafeStopCoroutine(runCoroutine);
+            SafeStopCoroutine(speedCoroutine);
+                                    
+            runCoroutine = StartCoroutine(RunProcess());            
+            speedCoroutine = StartCoroutine(SpeedProcess());
+            
             if (!isPlayer)
             {
-                StartCoroutine(MakePredictionProcess());
+                SafeStopCoroutine(predictionCoroutine);
+                predictionCoroutine = StartCoroutine(MakePredictionProcess());
             }
 
             isPlaying = true;
@@ -59,22 +59,23 @@ namespace CockroachRunner
 
         public void Stop()
         {
-            if (runCoroutine != null)
-            {
-                StopCoroutine(runCoroutine);
-                runCoroutine = null;
-            }
-
-            if (speedCoroutine != null)
-            {
-                StopCoroutine(speedCoroutine);
-                speedCoroutine = null;
-            }
-
+            SafeStopCoroutine(runCoroutine);
+            SafeStopCoroutine(speedCoroutine);
+            SafeStopCoroutine(predictionCoroutine);
+                        
             predictionTime = 0f;
             cockroach.SetSpeed(0f);
             SetSpeed(0f, false);
             isPlaying = false;
+        }
+
+        private void SafeStopCoroutine(Coroutine coroutine)
+        {
+            if (coroutine != null) 
+            {
+                StopCoroutine(coroutine);
+                coroutine = null;
+            }
         }
 
         public void AddCockroach(Cockroach targetCockroach)
@@ -106,13 +107,13 @@ namespace CockroachRunner
         private IEnumerator SpeedProcess()
         {            
             while (true)
-            {                
+            {
                 if (predictionTime > 0f)
                 {
                     predictionTime -= Time.deltaTime;
                                         
                     if ((price <= graphView.CurrentPrice && predictUp) || (price >= graphView.CurrentPrice && !predictUp))
-                    {
+                    {                        
                         SetSpeed(gameSettings.FastRunningSpeed);
                     }
                     else
@@ -148,8 +149,15 @@ namespace CockroachRunner
             speed = fadeSpeed ? Mathf.MoveTowards(speed, value, gameSettings.ChangeSpeedRate * Time.deltaTime) : value;
             
             if (isPlayer)
-            {
-                eventsManager.InvokeEvent(GameEvents.PlayerSetSpeed, speed);
+            {                
+                try
+                {
+                    eventsManager.InvokeEvent(GameEvents.PlayerSetSpeed, speed);
+                }
+                catch (System.Exception exc)
+                {
+                    Debug.Log(exc);
+                }
             }
         }
     }

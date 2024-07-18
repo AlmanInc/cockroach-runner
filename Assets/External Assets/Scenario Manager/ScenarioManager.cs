@@ -66,7 +66,7 @@ namespace Scenario
         }
 
         private IEnumerator PlayStepProcess(ScenarioStepData data)
-        {
+        {            
             yield return new WaitForSeconds(data.delay);
             
             var step = data.step;

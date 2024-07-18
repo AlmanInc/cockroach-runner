@@ -24,6 +24,7 @@ namespace CockroachRunner
 
             buttonRace.onClick.AddListener(delegate
             {
+                const string NOT_ENOUGHT_MONEY_MESSAGE = "” вас недостаточно средств дл€ начала гонки.";
                 if (gameState.Currency >= gameSettings.RaceBet)
                 {
                     eventsManager.InvokeEvent(GameEvents.AddCurrency, -gameSettings.RaceBet);
@@ -32,7 +33,9 @@ namespace CockroachRunner
                 else
                 {
 #if UNITY_WEBGL && !UNITY_EDITOR
-                    jsJob.TrySendMessage("You don't have enough money for the race");
+                    jsJob.TrySendMessage(NOT_ENOUGHT_MONEY_MESSAGE);
+#else
+                    Debug.Log(NOT_ENOUGHT_MONEY_MESSAGE);
 #endif
                 }
             });

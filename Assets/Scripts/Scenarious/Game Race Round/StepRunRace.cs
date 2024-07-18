@@ -42,9 +42,9 @@ namespace CockroachRunner
             SetRaceTimeLabel();
 
             gameScreenView.OpenActualPanel(InGameViews.Game);
-
+            
             foreach (var unit in units) 
-            {
+            {                
                 unit.Play();
             }
 
@@ -54,6 +54,7 @@ namespace CockroachRunner
             {
                 StopCoroutine(raceCoroutine);
             }
+
             StartCoroutine(RaceTimeProcess());
         }
 

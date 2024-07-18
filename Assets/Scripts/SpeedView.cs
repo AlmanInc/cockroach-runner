@@ -39,7 +39,12 @@ namespace CockroachRunner
                 activateCoroutine = null;
             }
         }
-        
+
+        private void OnDisable()
+        {
+            eventsManager.RemoveListener(GameEvents.PlayerSetSpeed, SetPlayerSpeed);
+        }
+
         private void SetPlayerSpeed(params object[] args)
         {
             float speed = (float)args[0];
