@@ -50,7 +50,7 @@ namespace CockroachRunner
 
         public void TryGetUserRefId() => GetUserRef();
 
-        public void TrySendMessage(string str) => SendMessage(str);
+        public void TrySendMessage(string str) => ShowMessage(str);
 
         public void TryCopyReferalLink(string str) => CopyReferalLink(str);
     }

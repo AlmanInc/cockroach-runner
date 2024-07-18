@@ -28,7 +28,7 @@ namespace CockroachRunner
 
             labelPlace.text = gameState.PlayerPlace.ToString();
             labelResultTime.text = GameUtility.SecondsToFullTimeStringFormat(gameState.RaceTime);
-            laberReward.text = gameSettings.RaceBet.ToString();
+            laberReward.text = gameState.PlayerPlace == 1 ? gameSettings.RaceBet.ToString() : "0";
             gameScreenView.OpenActualPanel(InGameViews.Reward);
 
             if (gameState.PlayerPlace == 1)

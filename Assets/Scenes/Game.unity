@@ -11295,7 +11295,7 @@ MonoBehaviour:
   tickMaxFactor: 0.012
   trandChance: 50
   useRealTimeGeneration: 1
-  lockRequestDelay: 0.5
+  lockRequestDelay: 0.4
 --- !u!4 &1176719114 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1030995998, guid: abc00000000001326632472317349629, type: 3}

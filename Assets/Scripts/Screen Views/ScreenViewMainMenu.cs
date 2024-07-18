@@ -32,7 +32,7 @@ namespace CockroachRunner
                 else
                 {
 #if UNITY_WEBGL && !UNITY_EDITOR
-                    jsJob.TrySendMessage("You don't have enough money for race");
+                    jsJob.TrySendMessage("You don't have enough money for the race");
 #endif
                 }
             });
