@@ -1,6 +1,8 @@
 using System;
 using UnityEngine.UI;
 using UnityEngine;
+using Zenject;
+using System.Runtime.InteropServices;
 
 namespace CockroachRunner
 {
@@ -22,17 +24,27 @@ namespace CockroachRunner
         }
 
         [SerializeField] private bool isCompleted;
+        [SerializeField] private Button buttonTaskDetails;
 
         [Space]
         [SerializeField] private CompletedStateObject[] completedStateObjects;
 
         [Space]
         [SerializeField] private ColorableObject[] colorableTaskObjects;
+
+        [Inject] private EventsManager eventsManager;
                 
         private void OnEnable()
         {
             SetCompleteState(isCompleted);
+
+            buttonTaskDetails.onClick.AddListener(delegate
+            {                
+                eventsManager.InvokeEvent(GameEvents.TryOpenTaskDetails);
+            });
         }
+
+        private void OnDisable() => buttonTaskDetails.onClick.RemoveAllListeners();
 
         public void SetCompleteState(bool completed)
         {
@@ -45,6 +57,6 @@ namespace CockroachRunner
             {
                 obj.targetObject.color = completed ? obj.completedColor : obj.baseColor;
             }
-        }
+        }                
     }
 }

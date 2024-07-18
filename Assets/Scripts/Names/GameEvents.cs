@@ -8,6 +8,7 @@ namespace CockroachRunner
         UnitFinishedRace,
         UpdateCurrencyStatus,
         LoadCurrency,
-        AddCurrency
+        AddCurrency,
+        TryOpenTaskDetails
     }
 }

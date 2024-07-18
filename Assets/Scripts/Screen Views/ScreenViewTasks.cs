@@ -1,5 +1,6 @@
 using UnityEngine.UI;
 using UnityEngine;
+using Zenject;
 
 namespace CockroachRunner
 {
@@ -9,6 +10,8 @@ namespace CockroachRunner
         [SerializeField] private MenuGroupSwitcher menuGroupSwitcher;
         [SerializeField] private Button buttonBack;
         [SerializeField] private Button buttonTabReferal;
+
+        [Inject] private EventsManager eventsManager;
 
         public override void Activate()
         {            
@@ -23,14 +26,23 @@ namespace CockroachRunner
             {
                 menuGroupSwitcher.ShowPanel(ScreenViews.Referals);
             });
+
+            eventsManager.AddListener(GameEvents.TryOpenTaskDetails, OpenTaskDetails);
         }
 
         public override void Deactivate()
         {
-            base.Deactivate();
-
             buttonBack.onClick.RemoveAllListeners();
             buttonTabReferal.onClick.RemoveAllListeners();
+
+            eventsManager.RemoveListener(GameEvents.TryOpenTaskDetails, OpenTaskDetails);
+
+            base.Deactivate();
+        }
+
+        private void OpenTaskDetails(params object[] args)
+        {
+            menuGroupSwitcher.ShowPanel(ScreenViews.TaskDetails);
         }
     }
 }

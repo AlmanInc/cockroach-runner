@@ -19,7 +19,7 @@ namespace CockroachRunner
         [SerializeField] private JSJob jsJob;
         [SerializeField] private Text labelReferalLink;
         [SerializeField] private Button buttonCopyLink;
-
+                
         [Inject] private GameSettings gameSettings;
 
         public override void Activate()
@@ -67,11 +67,11 @@ namespace CockroachRunner
 
         public override void Deactivate()
         {
-            base.Deactivate();
-
             buttonBack.onClick.RemoveAllListeners();
             buttonTabTasks.onClick.RemoveAllListeners();
             buttonCopyLink.onClick.RemoveAllListeners();
-        }
+
+            base.Deactivate();
+        }                
     }
 }
