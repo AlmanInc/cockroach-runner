@@ -97,7 +97,7 @@ namespace CockroachRunner
             yield return SendRequest(gameSettings.RequestGetUserTasks, gameSettings.LogRequests);
             GetTasksResponseData getTasksResponseData = JsonUtility.FromJson<GetTasksResponseData>(response);
             PlayerData.Tasks = getTasksResponseData.tasks;
-            //Debug.Log(response);
+            Debug.Log(response);
             yield return ToProgressAnimationProcess(0.8f, 0.05f);
 
             yield return RestProgressLoadingProcess(time);
