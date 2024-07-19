@@ -6,6 +6,7 @@ namespace CockroachRunner
         public static string Id;
         public static string OwnerRefId;
         public static UserData[] Referals;
+        public static TaskData[] Tasks;
         public static float InitialPrice;
     }
 }

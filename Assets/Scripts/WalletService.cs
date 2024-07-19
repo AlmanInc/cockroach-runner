@@ -70,7 +70,7 @@ namespace CockroachRunner
         private IEnumerator AddCurrencyProcess(int amount)
         {
             IsLocked = true;
-            yield return SendRequest(gameSettings.AddCurrencyRequest, amount);
+            yield return SendRequest(gameSettings.RequestAddCurrency, amount);
 
             if (!string.IsNullOrEmpty(response)) 
             {
@@ -94,7 +94,7 @@ namespace CockroachRunner
         private IEnumerator GetCurrencyProcess()
         {
             IsLocked = true;
-            yield return SendRequest(gameSettings.GetCurrencyRequest);
+            yield return SendRequest(gameSettings.RequestGetCurrency);
 
             if (!string.IsNullOrEmpty(response))
             {

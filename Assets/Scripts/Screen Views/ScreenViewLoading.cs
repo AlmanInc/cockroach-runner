@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine;
 using Zenject;
-using UnityEngine.Networking;
 
 namespace CockroachRunner
 {
@@ -18,8 +18,7 @@ namespace CockroachRunner
         [Space]
         [SerializeField] private Text labelUserName;
         [SerializeField] private Text labelLog;
-        [SerializeField] private bool logRequests;
-
+        
         [Inject] private GameSettings gameSettings;
 
         private bool requestDone;
@@ -58,13 +57,13 @@ namespace CockroachRunner
             yield return GetOwnerRefIdForCurrentUser(0.3f, 0.1f, isUnityLoading);
 
                         
-            yield return SendRequest(gameSettings.CheckUserRequest, logRequests);            
+            yield return SendRequest(gameSettings.RequestCheckUser, gameSettings.LogRequests);            
             CheckUserResponseData checkUserData = JsonUtility.FromJson<CheckUserResponseData>(response);
             yield return ToProgressAnimationProcess(0.4f, 0.1f);
 
             if (checkUserData.exist)
             {
-                yield return SendRequest(gameSettings.UpdateUserRequest, logRequests);
+                yield return SendRequest(gameSettings.RequestUpdateUser, gameSettings.LogRequests);
                 yield return ToProgressAnimationProcess(0.6f, 0.2f);
             }
             else
@@ -72,30 +71,34 @@ namespace CockroachRunner
                 if (string.IsNullOrEmpty(PlayerData.OwnerRefId))
                 {
                     // Не реферальная ссылка
-                    yield return SendRequest(gameSettings.AddUserRequest, logRequests);
+                    yield return SendRequest(gameSettings.RequestAddUser, gameSettings.LogRequests);
                     yield return ToProgressAnimationProcess(0.6f, 0.2f);
                 }
                 else
                 {
                     // Реферальная ссылка
-                    yield return SendRequest(gameSettings.AddUserRequest, logRequests);
+                    yield return SendRequest(gameSettings.RequestAddUser, gameSettings.LogRequests);
                     yield return ToProgressAnimationProcess(0.5f, 0.1f);
 
-                    yield return SendRequest(gameSettings.AddReferalForUserRequest, logRequests);
+                    yield return SendRequest(gameSettings.RequestAddReferalForUser, gameSettings.LogRequests);
                     yield return ToProgressAnimationProcess(0.6f, 0.1f);
                 }
             }
             
-            yield return SendRequest(gameSettings.GetAllReferalsRequest, logRequests);
+            yield return SendRequest(gameSettings.RequestGetAllReferals, gameSettings.LogRequests);
             GetReferalsResponseData referalsData = JsonUtility.FromJson<GetReferalsResponseData>(response);
             PlayerData.Referals = referalsData.referals;
             yield return ToProgressAnimationProcess(0.7f, 0.1f);
 
             walletService.GetCurrency();
             yield return new WaitWhile(() => walletService.IsLocked);
-
             yield return ToProgressAnimationProcess(0.75f, 0.05f);
 
+            yield return SendRequest(gameSettings.RequestGetUserTasks, gameSettings.LogRequests);
+            GetTasksResponseData getTasksResponseData = JsonUtility.FromJson<GetTasksResponseData>(response);
+            PlayerData.Tasks = getTasksResponseData.tasks;
+            //Debug.Log(response);
+            yield return ToProgressAnimationProcess(0.8f, 0.05f);
 
             yield return RestProgressLoadingProcess(time);
 
@@ -171,7 +174,6 @@ namespace CockroachRunner
 
         private IEnumerator SendRequest(RequestData requestData, bool logRequest)
         {
-            //requestDone = false;
             response = string.Empty;
 
             string request = ConfigureRequest(requestData.request);
@@ -187,12 +189,10 @@ namespace CockroachRunner
 
                 if (webRequest.result == UnityWebRequest.Result.Success)
                 {
-                    //requestDone = true;
                     response = webRequest.downloadHandler.text;
                 }
                 else
                 {
-                    //requestDone = false;                    
                     Debug.LogError(webRequest.error);
                     yield return ShowErrorProcess(webRequest.error);
                 }

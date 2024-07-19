@@ -2,12 +2,13 @@ using System;
 using UnityEngine.UI;
 using UnityEngine;
 using Zenject;
-using System.Runtime.InteropServices;
 
 namespace CockroachRunner
 {
     public class TaskLineView : MonoBehaviour
     {
+        public string TaskId { get; set; }
+
         [Serializable]
         private struct CompletedStateObject
         {
@@ -22,8 +23,7 @@ namespace CockroachRunner
             public Color baseColor;
             public Color completedColor;
         }
-
-        [SerializeField] private bool isCompleted;
+                
         [SerializeField] private Button buttonTaskDetails;
 
         [Space]
@@ -36,17 +36,21 @@ namespace CockroachRunner
                 
         private void OnEnable()
         {
-            SetCompleteState(isCompleted);
-
             buttonTaskDetails.onClick.AddListener(delegate
-            {                
-                eventsManager.InvokeEvent(GameEvents.TryOpenTaskDetails);
+            {
+                eventsManager.InvokeEvent(GameEvents.TryOpenTaskDetails, TaskId);
             });
         }
 
         private void OnDisable() => buttonTaskDetails.onClick.RemoveAllListeners();
 
-        public void SetCompleteState(bool completed)
+        public void SetViewState(TaskData data)
+        {
+            TaskId = data.task_id;
+            SetCompleteState(data.done);
+        }
+
+        private void SetCompleteState(bool completed)
         {
             foreach (CompletedStateObject obj in completedStateObjects) 
             {

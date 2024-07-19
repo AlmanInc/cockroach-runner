@@ -16,6 +16,7 @@ MonoBehaviour:
   defaultUserName: Player
   referalLink: https://t.me/CockroachTestBot/cockroach_test_game/?startapp={id}
   serverName: cockroach-run.ru
+  logRequests: 0
   requestCheckUser:
     request: https://{server}/dal/check_exist?id={id}
     kind: 0
@@ -40,6 +41,9 @@ MonoBehaviour:
   requestAddCurrency:
     request: https://{server}/dal/add_balance?id={id}&balance={currency}
     kind: 0
+  requestGetUserTasks:
+    request: https://{server}/dal/get_tasks?id={id}
+    kind: 0
   raceBet: 100
   backCountTimeToStartRace: 3
   raceTime: 60
@@ -48,6 +52,9 @@ MonoBehaviour:
   fastRunningSpeed: 30
   fastRunningSpeedLabelValue: 5
   changeSpeedRate: 20
+  taskLineTop: {fileID: 7845105167526112442, guid: c19be1180a28e934c9856c8f4418b251, type: 3}
+  taskLineBase: {fileID: 5240859439573727403, guid: 7f1dd51a912c54c4db8deac4ef5ac029, type: 3}
+  taskLineBottom: {fileID: 1091015633208211009, guid: 5f01f80000d6d344ebb65f635e02cc41, type: 3}
   candleViewPrefab: {fileID: 7253834081102627202, guid: 37680c0afa5db3a4f9f422990b4e8a98, type: 3}
   cockroachPrefabs:
   - {fileID: -6899917529352781007, guid: 313ed9a7366973840b1bea39c2e11f93, type: 3}

@@ -66,7 +66,7 @@ namespace CockroachRunner
 
         private IEnumerator RealtimeGenerationProcess()
         {
-            RequestData requestData = gameSettings.GetPriceRequest;
+            RequestData requestData = gameSettings.RequestGetPrice;
             GetPriceResponseData priceData;
 
             while (true)
