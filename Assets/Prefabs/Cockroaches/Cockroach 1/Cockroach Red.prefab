@@ -82,10 +82,10 @@ MonoBehaviour:
   controller: {fileID: 6447923365942258743}
   minSpeedModificator:
     outsideSpeed: 1
-    animationSpeed: 1.25
+    animationSpeed: 0.9
   maxSpeedModificator:
     outsideSpeed: 12
-    animationSpeed: 12.5
+    animationSpeed: 15
 --- !u!1 &4234692979872094708
 GameObject:
   m_ObjectHideFlags: 0

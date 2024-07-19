@@ -34,7 +34,8 @@ namespace CockroachRunner
                 float targetSpeed = Mathf.Lerp(minSpeedModificator.animationSpeed, maxSpeedModificator.animationSpeed, progress);
 
                 controller.SetBool("Run", true);
-                controller.SetFloat("Speed", targetSpeed);
+                //controller.SetFloat("Speed", targetSpeed);
+                controller.SetFloat("Speed", speed);
             }
         }        
     }
