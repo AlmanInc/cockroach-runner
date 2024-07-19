@@ -57,7 +57,7 @@ MonoBehaviour:
   taskLineBottom: {fileID: 1091015633208211009, guid: 5f01f80000d6d344ebb65f635e02cc41, type: 3}
   candleViewPrefab: {fileID: 7253834081102627202, guid: 37680c0afa5db3a4f9f422990b4e8a98, type: 3}
   cockroachPrefabs:
-  - {fileID: -6899917529352781007, guid: 313ed9a7366973840b1bea39c2e11f93, type: 3}
-  - {fileID: 1060329666600785024, guid: 3ae1fa4d1f0ff4c4b839b9730009686f, type: 3}
-  - {fileID: 1694344842339228458, guid: 7017d2d9b1c5b4b44855f978ad2e8e07, type: 3}
-  - {fileID: 8943834493639892635, guid: 54252d46902714f4a88f536046998659, type: 3}
+  - {fileID: 545178407609597365, guid: 4302d987a1bb5da44b6d151d1474b1dc, type: 3}
+  - {fileID: 2532432407639575198, guid: cc8bd22a0ec373c4395fb5fc3026fee2, type: 3}
+  - {fileID: 561514114966337143, guid: a970a0e1416d4c44099ea9e944dfd2af, type: 3}
+  - {fileID: 3624666936181585269, guid: caa0ea42d3a758a4f812e609debf874c, type: 3}
