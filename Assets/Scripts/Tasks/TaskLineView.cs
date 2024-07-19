@@ -50,7 +50,7 @@ namespace CockroachRunner
         {
             TaskId = data.task_id;
             labelName.text = data.name;
-            labelReward.text = data.cost.ToString();
+            labelReward.text = $"+{data.cost}";
 
             SetCompleteState(data.done);
         }

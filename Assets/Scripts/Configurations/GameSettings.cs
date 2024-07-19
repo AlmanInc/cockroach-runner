@@ -41,7 +41,6 @@ namespace CockroachRunner
         [SerializeField] private CandleView candleViewPrefab;
 
         [Space]
-        [SerializeField] private Cockroach[] cockroachPrefabs;
         [SerializeField] private CockroachVariants[] cockroaches;
 
 
@@ -103,8 +102,6 @@ namespace CockroachRunner
         public TaskLineView TaskLineBottom => taskLineBottom;
 
         public CandleView CandleViewPrefab => candleViewPrefab;
-                
-        public Cockroach[] CockroachPrefabs => cockroachPrefabs;
 
         public CockroachVariants[] Cockroaches => cockroaches;
     }
