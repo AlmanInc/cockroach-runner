@@ -110,7 +110,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 160}
+  m_SizeDelta: {x: 1080, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7845105167526112442
 MonoBehaviour:
@@ -124,7 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebd6849636f7b0246a195624ea060112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCompleted: 0
+  labelName: {fileID: 1843498306505236359}
+  labelReward: {fileID: 3343893681418213111}
   buttonTaskDetails: {fileID: 2552898624483781519}
   completedStateObjects:
   - targetObject: {fileID: 5858130148591520521}

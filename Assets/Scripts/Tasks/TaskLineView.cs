@@ -23,7 +23,9 @@ namespace CockroachRunner
             public Color baseColor;
             public Color completedColor;
         }
-                
+
+        [SerializeField] private Text labelName;
+        [SerializeField] private Text labelReward;
         [SerializeField] private Button buttonTaskDetails;
 
         [Space]
@@ -47,6 +49,9 @@ namespace CockroachRunner
         public void SetViewState(TaskData data)
         {
             TaskId = data.task_id;
+            labelName.text = data.name;
+            labelReward.text = data.cost.ToString();
+
             SetCompleteState(data.done);
         }
 

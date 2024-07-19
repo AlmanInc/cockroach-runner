@@ -1432,7 +1432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 296484028}
   m_Layer: 5
-  m_Name: Reward Block (1)
+  m_Name: Reward Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12983,6 +12983,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenViewPanel: {fileID: 1904884572}
   menuGroupSwitcher: {fileID: 1415605178}
+  labelCaption: {fileID: 590875615}
+  labelDescription: {fileID: 1542176665}
+  labelReward: {fileID: 607456110}
   buttonBack: {fileID: 778030557}
   buttonDoTask: {fileID: 1184459279}
   buttonCheckTask: {fileID: 1244305658}

@@ -14,6 +14,7 @@ namespace CockroachRunner
         [SerializeField] private Button buttonTabReferal;
 
         [Inject] DiContainer container;
+        [Inject] private GameState gameState;
         [Inject] private GameSettings gameSettings;
         [Inject] private EventsManager eventsManager;
 
@@ -52,6 +53,9 @@ namespace CockroachRunner
 
         private void OpenTaskDetails(params object[] args)
         {
+            string taskId = (string)args[0];
+            gameState.CurrentTaskId = taskId;
+
             menuGroupSwitcher.ShowPanel(ScreenViews.TaskDetails);
         }
 

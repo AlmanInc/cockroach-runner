@@ -11,5 +11,7 @@ namespace CockroachRunner
         public int FinishedOpponentsCount { get; set; }
 
         public int PlayerPlace { get; set; }
+
+        public string CurrentTaskId { get; set; }
     }
 }
