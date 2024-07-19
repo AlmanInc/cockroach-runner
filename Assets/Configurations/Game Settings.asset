@@ -61,3 +61,24 @@ MonoBehaviour:
   - {fileID: 80571506823392337, guid: 7315622151ab1ce44a31e861cac5156f, type: 3}
   - {fileID: 1702045071457468612, guid: 57e4867d619729041a1b1c615f1ef247, type: 3}
   - {fileID: 4948895659469294407, guid: 72ffa1fb55ee14b499fb497b29cf49e5, type: 3}
+  cockroaches:
+  - variants:
+    - {fileID: 3624666936181585269, guid: caa0ea42d3a758a4f812e609debf874c, type: 3}
+    - {fileID: 561514114966337143, guid: a970a0e1416d4c44099ea9e944dfd2af, type: 3}
+    - {fileID: 2532432407639575198, guid: cc8bd22a0ec373c4395fb5fc3026fee2, type: 3}
+    - {fileID: 545178407609597365, guid: 4302d987a1bb5da44b6d151d1474b1dc, type: 3}
+  - variants:
+    - {fileID: 1157498442059500132, guid: 80de2d1684d536b44a563daa39723e65, type: 3}
+    - {fileID: 4444629498092691704, guid: 177431144922a4248aed9446f9900dab, type: 3}
+    - {fileID: 8318984594618832358, guid: 56c7e638c1ee84041b50bd48d7b25c59, type: 3}
+    - {fileID: 5303052953062428732, guid: 25d33109282878d448c10a62964dceab, type: 3}
+  - variants:
+    - {fileID: 3541754365720819368, guid: 15e7b5a970ed5a84eb8e3fde6d27b629, type: 3}
+    - {fileID: 1434037232730444713, guid: fd64270e7a89c834ca311fc6621b2187, type: 3}
+    - {fileID: 629897702027443097, guid: 40d7486aefc398342815e98db44d0927, type: 3}
+    - {fileID: 8120843339972170084, guid: c478f7ba2172c57489ec7462318003d8, type: 3}
+  - variants:
+    - {fileID: 6314138117756351752, guid: ea9bc3a61b882304fbf4786d596d7f93, type: 3}
+    - {fileID: 80571506823392337, guid: 7315622151ab1ce44a31e861cac5156f, type: 3}
+    - {fileID: 1702045071457468612, guid: 57e4867d619729041a1b1c615f1ef247, type: 3}
+    - {fileID: 4948895659469294407, guid: 72ffa1fb55ee14b499fb497b29cf49e5, type: 3}

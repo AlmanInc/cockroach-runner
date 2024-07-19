@@ -45,7 +45,8 @@ namespace CockroachRunner
 
         private void GenerateTreadmealsAndCockroaches()
         {
-            Cockroach[] prefabs = gameSettings.CockroachPrefabs;
+            //Cockroach[] prefabs = gameSettings.CockroachPrefabs;
+            CockroachVariants[] prefabs = gameSettings.Cockroaches;
 
             ArrayUniqueIndexGrabber treadmillsGrabber = new ArrayUniqueIndexGrabber();
             treadmillsGrabber.Activate(treadmills.Length);
@@ -56,7 +57,7 @@ namespace CockroachRunner
             int unitIndex = treadmillsGrabber.NexIndex();
             player.CachedTransform.position = treadmills[unitIndex].position;
             
-            Cockroach prefab = prefabs[cockroachGrabber.NexIndex()];
+            Cockroach prefab = prefabs[cockroachGrabber.NexIndex()].RandomVariant;
 
             player.AddCockroach(Instantiate<Cockroach>(prefab));
             //player.ShowName();
@@ -72,7 +73,7 @@ namespace CockroachRunner
 
                 bots[i].CachedTransform.position = treadmills[unitIndex].position;
 
-                prefab = prefabs[cockroachGrabber.NexIndex()];
+                prefab = prefabs[cockroachGrabber.NexIndex()].RandomVariant;
                 bots[i].AddCockroach(Instantiate<Cockroach>(prefab));
             }
 

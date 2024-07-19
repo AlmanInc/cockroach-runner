@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CockroachRunner
@@ -41,6 +42,7 @@ namespace CockroachRunner
 
         [Space]
         [SerializeField] private Cockroach[] cockroachPrefabs;
+        [SerializeField] private CockroachVariants[] cockroaches;
 
 
         // Base Settings
@@ -103,5 +105,7 @@ namespace CockroachRunner
         public CandleView CandleViewPrefab => candleViewPrefab;
                 
         public Cockroach[] CockroachPrefabs => cockroachPrefabs;
+
+        public CockroachVariants[] Cockroaches => cockroaches;
     }
 }
