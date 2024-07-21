@@ -8,6 +8,8 @@ namespace CockroachRunner
         [SerializeField] private RectTransform line;
         [SerializeField] private Text labelPrice;
 
+        public float Price { get; set; }
+
         public RectTransform Line => line;
 
         public Text LabelPrice => labelPrice;

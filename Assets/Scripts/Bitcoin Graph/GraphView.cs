@@ -15,6 +15,7 @@ namespace CockroachRunner
         [SerializeField] private float startMaxPrice;
         [SerializeField] private float timeFrame = 3f;
         [SerializeField] private float startPrice;
+        [SerializeField] private float realtimeStartPriceOffset = 80f;
         [SerializeField] private PriceLine currentPriceLine;
 
         [Header("Price Lines")]
@@ -56,12 +57,9 @@ namespace CockroachRunner
                     yield return null;
                     price = trand.Next();
                 }
-
-                float factor = 0.005f;
-                //minPrice = price - price * factor;
-                //maxPrice = price + price * factor;
-                minPrice = price - 90f;
-                maxPrice = price + 90f;
+                                
+                minPrice = price - realtimeStartPriceOffset;
+                maxPrice = price + realtimeStartPriceOffset;
                 SetNewMinMaxPrices(minPrice, maxPrice);
             }
 
@@ -75,6 +73,7 @@ namespace CockroachRunner
             for (int i = 0; i < lines.Length; i++)
             {
                 float price = max - i * priceStep;
+                lines[i].Price = price;
                 lines[i].LabelPrice.text = string.Format("{0:0.0}", price);
             }
         }
@@ -88,12 +87,7 @@ namespace CockroachRunner
         private IEnumerator DrawCandlesProcess()
         {
             yield return new WaitForEndOfFrame();
-
-            //if (!trand.RealTimePrice)
-            //{
-            //    price = startPrice;
-            //}
-
+                        
             float time = timeFrame;
 
             CandleView actualCandle = GenerateNewCandle();
@@ -174,10 +168,54 @@ namespace CockroachRunner
                     actualCandle.DrawCandle(price);
 
                     time = timeFrame;
+
+                    RefreshMinMaxPrices(actualCandle);
                 }
 
                 yield return null;
             }
+        }
+
+        private void RefreshMinMaxPrices(CandleView actualCandle)
+        {
+            print("Check");
+
+            float min = lines[lines.Length - 2].Price;      // Предпоследний элемент
+            float max = lines[1].Price;                     // Следующий после первого элемент
+            bool needUpdateMin = true;
+            bool needUpdateMax = true;
+
+            foreach (var candle in candles)
+            {
+                if (candle.MaxPrice >= max)
+                {
+                    needUpdateMax = false;
+                }
+
+                if (candle.MinPrice <= min) 
+                {
+                    needUpdateMin = false;                    
+                }
+            }
+
+            if (actualCandle.MaxPrice >= max)
+            {
+                needUpdateMax = false;                
+            }
+
+            if (actualCandle.MinPrice <= min)
+            {
+                needUpdateMin = false;                
+            }
+
+            if (needUpdateMin || needUpdateMax)
+            {
+                float targetMin = needUpdateMin ? min : minPrice;
+                float targetMax = needUpdateMax ? max : maxPrice;
+                SetNewMinMaxPrices(targetMin, targetMax);
+                RedrawCandles();
+                actualCandle.RedrawForNewLimits();
+            }                        
         }
 
         private CandleView GenerateNewCandle()

@@ -7281,6 +7281,7 @@ MonoBehaviour:
   startMaxPrice: 68.169
   timeFrame: 3
   startPrice: 63.414
+  realtimeStartPriceOffset: 80
   currentPriceLine: {fileID: 8280263118731629439}
   lines:
   - {fileID: 1664097755071184594}

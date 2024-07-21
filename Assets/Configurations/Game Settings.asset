@@ -52,7 +52,7 @@ MonoBehaviour:
   requestGetUserTasks:
     request: https://{server}/dal/get_tasks?id={id}
     kind: 0
-    showResponse: 0
+    showResponse: 1
   raceBet: 100
   backCountTimeToStartRace: 3
   raceTime: 60
