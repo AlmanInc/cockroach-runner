@@ -20,30 +20,39 @@ MonoBehaviour:
   requestCheckUser:
     request: https://{server}/dal/check_exist?id={id}
     kind: 0
+    showResponse: 0
   requestUpdateUser:
     request: https://{server}/dal/update_user?id={id}&name={name}
     kind: 0
+    showResponse: 0
   requestAddUser:
     request: https://{server}/dal/add_user?id={id}&name={name}
     kind: 0
+    showResponse: 0
   requestAddReferalForUser:
     request: https://{server}/dal/add_referal?id={id}&referal_id={referal_id}
     kind: 0
+    showResponse: 0
   requestGetAllReferals:
     request: https://{server}/dal/get_referal?id={id}
     kind: 0
+    showResponse: 0
   requestGetPrice:
     request: https://cockroach-run.ru/dal/get_cur_course
     kind: 0
+    showResponse: 0
   requestGetCurrency:
     request: https://{server}/dal/get_balance?id={id}
     kind: 0
+    showResponse: 0
   requestAddCurrency:
     request: https://{server}/dal/add_balance?id={id}&balance={currency}
     kind: 0
+    showResponse: 0
   requestGetUserTasks:
     request: https://{server}/dal/get_tasks?id={id}
     kind: 0
+    showResponse: 0
   raceBet: 100
   backCountTimeToStartRace: 3
   raceTime: 60
@@ -56,11 +65,6 @@ MonoBehaviour:
   taskLineBase: {fileID: 5240859439573727403, guid: 7f1dd51a912c54c4db8deac4ef5ac029, type: 3}
   taskLineBottom: {fileID: 1091015633208211009, guid: 5f01f80000d6d344ebb65f635e02cc41, type: 3}
   candleViewPrefab: {fileID: 7253834081102627202, guid: 37680c0afa5db3a4f9f422990b4e8a98, type: 3}
-  cockroachPrefabs:
-  - {fileID: 6314138117756351752, guid: ea9bc3a61b882304fbf4786d596d7f93, type: 3}
-  - {fileID: 80571506823392337, guid: 7315622151ab1ce44a31e861cac5156f, type: 3}
-  - {fileID: 1702045071457468612, guid: 57e4867d619729041a1b1c615f1ef247, type: 3}
-  - {fileID: 4948895659469294407, guid: 72ffa1fb55ee14b499fb497b29cf49e5, type: 3}
   cockroaches:
   - variants:
     - {fileID: 3624666936181585269, guid: caa0ea42d3a758a4f812e609debf874c, type: 3}

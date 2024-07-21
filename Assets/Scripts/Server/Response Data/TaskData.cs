@@ -9,7 +9,8 @@ namespace CockroachRunner
         public string name;
         public string description;
         public int cost;
+        public int type;
+        public string param;
         public bool done;
-        public DateTime done_date;
     }
 }

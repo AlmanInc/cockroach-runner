@@ -8,5 +8,6 @@ namespace CockroachRunner
     {
         public string request;
         public RequestTypes kind;
+        public bool showResponse;
     }
 }

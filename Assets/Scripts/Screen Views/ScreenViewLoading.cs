@@ -20,8 +20,7 @@ namespace CockroachRunner
         [SerializeField] private Text labelLog;
         
         [Inject] private GameSettings gameSettings;
-
-        private bool requestDone;
+                
         private string response;
         
         private float progress;
@@ -96,8 +95,7 @@ namespace CockroachRunner
 
             yield return SendRequest(gameSettings.RequestGetUserTasks, gameSettings.LogRequests);
             GetTasksResponseData getTasksResponseData = JsonUtility.FromJson<GetTasksResponseData>(response);
-            PlayerData.Tasks = getTasksResponseData.tasks;
-            //Debug.Log(response);
+            PlayerData.Tasks = getTasksResponseData.tasks;            
             yield return ToProgressAnimationProcess(0.8f, 0.05f);
 
             yield return RestProgressLoadingProcess(time);
@@ -190,6 +188,10 @@ namespace CockroachRunner
                 if (webRequest.result == UnityWebRequest.Result.Success)
                 {
                     response = webRequest.downloadHandler.text;
+                    if (requestData.showResponse)
+                    {
+                        Debug.Log(response);
+                    }
                 }
                 else
                 {
