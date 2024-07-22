@@ -9,8 +9,10 @@ namespace CockroachRunner
         public string name;
         public string description;
         public int cost;
-        public int type;
+        public string type;
         public string param;
         public bool done;
+
+        public TaskKinds Kind { get; set; }
     }
 }

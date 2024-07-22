@@ -12987,6 +12987,9 @@ MonoBehaviour:
   labelDescription: {fileID: 1542176665}
   labelReward: {fileID: 607456110}
   buttonBack: {fileID: 778030557}
+  bottomButtonsPanel: {fileID: 391173634}
+  fullPanelSize: 420
+  shortPanelSize: 250
   buttonDoTask: {fileID: 1184459279}
   buttonCheckTask: {fileID: 1244305658}
 --- !u!1 &2127335156

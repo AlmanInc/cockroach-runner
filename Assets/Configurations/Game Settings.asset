@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultUserId: 15
   defaultUserName: Player
-  referalLink: https://t.me/CockroachTestBot/cockroach_test_game/?startapp={id}
+  referalLink: https://t.me/CockroachRunBot/cockroach_run_game/?startapp={id}
   serverName: cockroach-run.ru
   logRequests: 0
   requestCheckUser:
@@ -52,7 +52,7 @@ MonoBehaviour:
   requestGetUserTasks:
     request: https://{server}/dal/get_tasks?id={id}
     kind: 0
-    showResponse: 1
+    showResponse: 0
   raceBet: 100
   backCountTimeToStartRace: 3
   raceTime: 60

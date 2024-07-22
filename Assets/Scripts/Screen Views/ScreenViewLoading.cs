@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
@@ -96,6 +97,10 @@ namespace CockroachRunner
             yield return SendRequest(gameSettings.RequestGetUserTasks, gameSettings.LogRequests);
             GetTasksResponseData getTasksResponseData = JsonUtility.FromJson<GetTasksResponseData>(response);
             PlayerData.Tasks = getTasksResponseData.tasks;            
+            foreach (var item in PlayerData.Tasks)
+            {
+                item.Kind = (TaskKinds)Enum.Parse(typeof(TaskKinds), item.type);                
+            }
             yield return ToProgressAnimationProcess(0.8f, 0.05f);
 
             yield return RestProgressLoadingProcess(time);
