@@ -23,6 +23,7 @@ namespace CockroachRunner
         [SerializeField] private RequestData requestGetCurrency;        // user balance
         [SerializeField] private RequestData requestAddCurrency;
         [SerializeField] private RequestData requestGetUserTasks;
+        [SerializeField] private RequestData requestCheckTask;
 
         [Header("Race Settings")]
         [SerializeField] private int raceBet;
@@ -74,6 +75,8 @@ namespace CockroachRunner
         public RequestData RequestAddCurrency => requestAddCurrency;
 
         public RequestData RequestGetUserTasks => requestGetUserTasks;
+
+        public RequestData RequestCheckTask => requestCheckTask;
 
 
         // Other

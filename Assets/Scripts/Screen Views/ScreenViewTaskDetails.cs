@@ -1,7 +1,7 @@
+using System.Linq;
 using UnityEngine.UI;
 using UnityEngine;
 using Zenject;
-using System.Linq;
 
 namespace CockroachRunner
 {
@@ -22,6 +22,7 @@ namespace CockroachRunner
         [SerializeField] private Button buttonCheckTask;
         
         [Inject] private GameState gameState;
+        [Inject] private GameSettings gameSettings;
 
         public override void Activate()
         {
@@ -72,9 +73,25 @@ namespace CockroachRunner
                     {
                         bottomButtonsPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, fullPanelSize);
                         buttonCheckTask.gameObject.SetActive(true);
+
+                        buttonDoTask.onClick.AddListener(delegate
+                        {
+                            Application.OpenURL(task.param);
+                        });
                     }
                     break;
             }
+        }
+
+        private string ConfigureRequestString(TaskData taskData, string request)
+        {
+            string result = request.Replace("{server}", gameSettings.ServerName);
+            result = result.Replace("{name}", PlayerData.Name);
+            result = result.Replace("{id}", PlayerData.Id);
+            result = result.Replace("{referal_id}", PlayerData.OwnerRefId);
+            result = result.Replace("{task_id}", taskData.task_id);
+
+            return result;
         }
     }
 }

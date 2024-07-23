@@ -53,6 +53,10 @@ MonoBehaviour:
     request: https://{server}/dal/get_tasks?id={id}
     kind: 0
     showResponse: 0
+  requestCheckTask:
+    request: https://{server}/dal/commit_task?id={id}&task_id={task_id}
+    kind: 0
+    showResponse: 0
   raceBet: 100
   backCountTimeToStartRace: 3
   raceTime: 60
