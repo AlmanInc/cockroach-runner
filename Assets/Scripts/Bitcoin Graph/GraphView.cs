@@ -178,8 +178,6 @@ namespace CockroachRunner
 
         private void RefreshMinMaxPrices(CandleView actualCandle)
         {
-            print("Check");
-
             float min = lines[lines.Length - 2].Price;      // Предпоследний элемент
             float max = lines[1].Price;                     // Следующий после первого элемент
             bool needUpdateMin = true;
