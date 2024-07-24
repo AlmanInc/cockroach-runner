@@ -1,7 +1,10 @@
+using System.Collections;
 using System.Linq;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine;
 using Zenject;
+using System;
 
 namespace CockroachRunner
 {
@@ -12,6 +15,7 @@ namespace CockroachRunner
         [SerializeField] private Text labelCaption;
         [SerializeField] private Text labelDescription;
         [SerializeField] private Text labelReward;
+        [SerializeField] private GameObject locker;
         [SerializeField] private Button buttonBack;
 
         [Header("Bottom Elements")]
@@ -20,13 +24,17 @@ namespace CockroachRunner
         [SerializeField] private float shortPanelSize;
         [SerializeField] private Button buttonDoTask;
         [SerializeField] private Button buttonCheckTask;
-        
+
+        [Inject] private EventsManager eventsManager;
         [Inject] private GameState gameState;
         [Inject] private GameSettings gameSettings;
 
+        private TaskData task;
+        private string response;
+
         public override void Activate()
         {
-            TaskData task = PlayerData.Tasks.FirstOrDefault((t) => gameState.CurrentTaskId == t.task_id);
+            task = PlayerData.Tasks.FirstOrDefault((t) => gameState.CurrentTaskId == t.task_id);
             
             if (task != null) 
             {
@@ -66,6 +74,8 @@ namespace CockroachRunner
                     {
                         bottomButtonsPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, shortPanelSize);
                         buttonCheckTask.gameObject.SetActive(false);
+
+                        buttonDoTask.onClick.AddListener(CheckTask);
                     }
                     break;
 
@@ -78,9 +88,47 @@ namespace CockroachRunner
                         {
                             Application.OpenURL(task.param);
                         });
+
+                        buttonCheckTask.onClick.AddListener(CheckTask);
                     }
                     break;
             }
+        }
+
+        private void CheckTask()
+        {
+            StartCoroutine(CheckTaskProcess());
+        }
+
+        private IEnumerator CheckTaskProcess()
+        {
+            locker.SetActive(true);
+
+            yield return SendRequest(gameSettings.RequestCheckTask, task, gameSettings.LogRequests);
+            if (!string.IsNullOrEmpty(response))
+            {
+                StatusResponse statusData = JsonUtility.FromJson<StatusResponse>(response);
+
+                if (statusData.status)
+                {
+                    // Refresh tasks
+                    yield return SendRequest(gameSettings.RequestGetUserTasks, task, gameSettings.LogRequests);
+                    GetTasksResponseData getTasksResponseData = JsonUtility.FromJson<GetTasksResponseData>(response);
+                    PlayerData.Tasks = getTasksResponseData.tasks;
+                    foreach (var item in PlayerData.Tasks)
+                    {
+                        item.Kind = (TaskKinds)Enum.Parse(typeof(TaskKinds), item.type);
+                    }
+                }
+
+                eventsManager.InvokeEvent(GameEvents.AddCurrency, 0);
+
+
+                locker.SetActive(false);
+                menuGroupSwitcher.ShowPanel(statusData.status ? ScreenViews.TaskDoneSuccessfully : ScreenViews.TaskDoneUnsuccessfully);
+            }
+
+            locker.SetActive(false);
         }
 
         private string ConfigureRequestString(TaskData taskData, string request)
@@ -92,6 +140,38 @@ namespace CockroachRunner
             result = result.Replace("{task_id}", taskData.task_id);
 
             return result;
+        }
+
+        private IEnumerator SendRequest(RequestData requestData, TaskData task, bool logRequest)
+        {
+            response = string.Empty;
+
+            string request = ConfigureRequestString(task, requestData.request);
+
+            if (logRequest)
+            {
+                Debug.Log(request);
+            }
+
+            using (UnityWebRequest webRequest = UnityWebRequest.Get(request))
+            {
+                yield return webRequest.SendWebRequest();
+
+                if (webRequest.result == UnityWebRequest.Result.Success)
+                {
+                    response = webRequest.downloadHandler.text;
+                    if (requestData.showResponse)
+                    {
+                        Debug.Log(response);
+                    }
+                }
+                else
+                {
+                    Debug.LogError(webRequest.error);                    
+                    //yield return ShowErrorProcess(webRequest.error);
+                    yield return null;
+                }
+            }
         }
     }
 }

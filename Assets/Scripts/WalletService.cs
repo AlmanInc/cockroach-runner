@@ -78,10 +78,10 @@ namespace CockroachRunner
 
                 GetCurrencyResponseData data = JsonUtility.FromJson<GetCurrencyResponseData>(response);
                 
-                if (gameState.Currency != data.balance)
-                {
-                    Debug.LogError("Different balances");
-                }
+                //if (gameState.Currency != data.balance)
+                //{
+                //    Debug.LogError("Different balances");
+                //}
                 
                 gameState.Currency = data.balance;
 

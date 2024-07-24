@@ -54,6 +54,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 0017c9e62a4203c4697c03e0d13dd706, type: 3}
     - {fileID: 2800000, guid: 91630b5b132286f4385855bd13797415, type: 3}
     - {fileID: 2800000, guid: cdfa004c4fb2f4e41889ea09d457dbfd, type: 3}
+    - {fileID: 2800000, guid: a5b7ab4d43ccc8a49bbb0d597ab6ed7c, type: 3}
     - {fileID: 2800000, guid: 951565dc21ae8174cb3542ed8e6720da, type: 3}
     - {fileID: 2800000, guid: 08dcd0981835d194b957520ce7494c79, type: 3}
     - {fileID: 2800000, guid: 5dc040f570bfb1343ac3f0961e1c0ce8, type: 3}
@@ -108,6 +109,7 @@ SpriteAtlas:
     - 951565dc21ae8174cb3542ed8e6720da: 21300000
     - 46b2334dd2bc40143a90d50040a32b73: 21300000
     - 65110b4d0a75cc848a0b1e6855cf5a09: 21300000
+    - a5b7ab4d43ccc8a49bbb0d597ab6ed7c: 21300000
     - 5fa3637dead71a045be6c60bb56048a7: 21300000
     - ef0a899e91148dd48a6ca37dcb042ee4: 21300000
   m_MasterAtlas: {fileID: 0}
@@ -147,6 +149,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 951565dc21ae8174cb3542ed8e6720da, type: 3}
   - {fileID: 21300000, guid: 46b2334dd2bc40143a90d50040a32b73, type: 3}
   - {fileID: 21300000, guid: 65110b4d0a75cc848a0b1e6855cf5a09, type: 3}
+  - {fileID: 21300000, guid: a5b7ab4d43ccc8a49bbb0d597ab6ed7c, type: 3}
   - {fileID: 21300000, guid: 5fa3637dead71a045be6c60bb56048a7, type: 3}
   - {fileID: 21300000, guid: ef0a899e91148dd48a6ca37dcb042ee4, type: 3}
   m_PackedSpriteNamesToIndex:
@@ -185,6 +188,7 @@ SpriteAtlas:
   - button-dark-reg-border-big
   - icon-completed
   - sprite-circle-fill
+  - button-big-red
   - panel-background-item-0
   - icon-arrow-2
   m_RenderDataMap: {}

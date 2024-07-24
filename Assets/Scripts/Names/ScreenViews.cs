@@ -13,6 +13,8 @@ namespace CockroachRunner
         Game,
         Tasks,
         Referals,
-        TaskDetails
+        TaskDetails,
+        TaskDoneSuccessfully,
+        TaskDoneUnsuccessfully
     }
 }
