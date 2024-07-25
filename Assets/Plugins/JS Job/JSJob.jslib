@@ -74,6 +74,7 @@ mergeInto(LibraryManager.library,
 	
 	CopyReferalLink: function(str)
 	{
+		document.getElementsByTagName('html')[0].focus();
 		navigator.clipboard.writeText(UTF8ToString(str));
     }
 });
