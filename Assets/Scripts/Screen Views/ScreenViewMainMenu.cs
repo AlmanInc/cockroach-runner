@@ -2,6 +2,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 using Zenject;
+using System;
 
 namespace CockroachRunner
 {
@@ -24,18 +25,28 @@ namespace CockroachRunner
 
             buttonRace.onClick.AddListener(delegate
             {
-                const string NOT_ENOUGHT_MONEY_MESSAGE = "” вас недостаточно средств дл€ начала гонки.";
-                if (gameState.Currency >= gameSettings.RaceBet)
+                try
                 {
-                    eventsManager.InvokeEvent(GameEvents.AddCurrency, -gameSettings.RaceBet);
-                    SceneManager.LoadSceneAsync("Game");
-                }
-                else
-                {
+                    const string NOT_ENOUGHT_MONEY_MESSAGE = "” вас недостаточно средств дл€ начала гонки.";
+                    if (gameState.Currency >= gameSettings.RaceBet)
+                    {
+                        eventsManager.InvokeEvent(GameEvents.AddCurrency, -gameSettings.RaceBet);
+                        SceneManager.LoadSceneAsync("Game");
+                    }
+                    else
+                    {
 #if UNITY_WEBGL && !UNITY_EDITOR
                     jsJob.TrySendMessage(NOT_ENOUGHT_MONEY_MESSAGE);
 #else
-                    Debug.Log(NOT_ENOUGHT_MONEY_MESSAGE);
+                        Debug.Log(NOT_ENOUGHT_MONEY_MESSAGE);
+#endif
+                    }
+                }
+                catch (Exception exc)
+                {
+                    Debug.Log(exc);
+#if UNITY_WEBGL && !UNITY_EDITOR
+                    jsJob.TrySendMessage(exc.Message);
 #endif
                 }
             });
